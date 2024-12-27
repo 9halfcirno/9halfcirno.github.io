@@ -16,10 +16,22 @@
             <span class="navbar-text">这是个⑨的网页</span>
         </a>
     </nav>
-
+<div id = "markdown - output"></div>
     
 
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.17/marked.min.js"></script>
+
+<script>
+const markdownText = "# This is a Markdown Heading\n\nThis is some Markdown text.";
+
+const html = marked(markdownText);
+
+document.getElementById('markdown - output').innerHTML = html;
+
+</script>
+
+
+
 </body>
 
 </html>
