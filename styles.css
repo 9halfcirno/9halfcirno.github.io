@@ -5,10 +5,10 @@ body {
 }
 
 .blurred-background {
-  -webkit-filter: blur(5px); /* 针对Chrome、Safari等webkit内核浏览器，这里的5px是模糊半径，可根据需要调整 */
-  -moz-filter: blur(5px); /* 针对Firefox */
-  -o-filter: blur(5px); /* 针对旧的Opera浏览器 */
-  filter: blur(5px); /* 标准语法 */
+  -webkit-filter: blur(15px); /* 针对Chrome、Safari等webkit内核浏览器，这里的5px是模糊半径，可根据需要调整 */
+  -moz-filter: blur(15px); /* 针对Firefox */
+  -o-filter: blur(15px); /* 针对旧的Opera浏览器 */
+  filter: blur(15px); /* 标准语法 */
 }
 
 .navbar {
