@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⑨的小网页</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+    body {
+    display: flex;
+    flex - direction: column;
+    }
+
+    .bg {
+    order: 100;
+    }
+    </style>
     <script>
       function getDeviceType() {
      const userAgent = navigator.userAgent;
@@ -33,7 +43,7 @@
 </head>
 
 <body class = "blurred - background">
-    <img id="baka">
+    <img id="baka" class="bg">
     <nav class="navbar">
         <!-- 导航栏内容 -->
         <a href="index.html" class="navbar-link">
@@ -43,20 +53,6 @@
     </nav>
 <div id = "markdown - output"></div>
     
-
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.17/marked.min.js"></script>
-
-<script>
-const markdownText = "# This is a Markdown Heading\n\nThis is some Markdown text.";
-
-const html = marked(markdownText);
-
-document.getElementById('markdown - output').innerHTML = html;
-
-</script>
-
-
-
 </body>
 
 </html>
