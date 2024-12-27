@@ -2,9 +2,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-#baka {
     background-repeat: no-repeat;  /* 防止图片平铺 */
     background-size: cover; /* 填充背景，可能会裁剪图片以适应元素大小 */
     background-position: center; /* 使背景图片居中显示 */
@@ -12,10 +9,7 @@ body {
    -moz-filter: blur(15px); /* 针对Firefox */
    -o-filter: blur(15px); /* 针对旧的Opera浏览器 */
    filter: blur(15px); /* 标准语法 */
-}
 
-.blurred-background {
-  
 }
 
 .navbar {
