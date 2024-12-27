@@ -6,9 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⑨的小网页</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      function getDeviceType() {
+     const userAgent = navigator.userAgent;
+     if (/Mobi|Android/i.test(userAgent)) {
+       // 这是移动设备（手机或平板电脑）
+       return 'mobile';
+     } else {
+       // 这是桌面设备（电脑）
+       return 'desktop';
+     }
+   }
+
+    window.onload = function() {
+     const deviceType = getDeviceType();
+     let sizeParam;
+     if (deviceType === 'mobile') {
+       sizeParam = 'wap';
+     } else {
+       sizeParam = 'pc';
+     }
+     const body = document.getElementById('baka');
+     body.style.background = `url('https://img.paulzzh.com/touhou/random?size=${sizeParam}&site=all')`;
+   };
+    </script>
 </head>
 
-<body>
+<body id="baka">
     <nav class="navbar">
         <!-- 导航栏内容 -->
         <a href="index.html" class="navbar-link">
