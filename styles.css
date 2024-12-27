@@ -5,10 +5,6 @@ body {
     background-repeat: no-repeat;  /* 防止图片平铺 */
     background-size: cover; /* 填充背景，可能会裁剪图片以适应元素大小 */
     background-position: center; /* 使背景图片居中显示 */
-    -webkit-filter: blur(15px); /* 针对Chrome、Safari等webkit内核浏览器，这里的5px是模糊半径，可根据需要调整 */
-   -moz-filter: blur(15px); /* 针对Firefox */
-   -o-filter: blur(15px); /* 针对旧的Opera浏览器 */
-   filter: blur(15px); /* 标准语法 */
 
 }
 
