@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 确保内容靠左对齐 */
+    background-color: #f8f9fa; /* 背景颜色 */
+    padding: 10px 20px; /* 内边距 */
+    border-radius: 15px; /* 圆角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.navbar-link {
+    text-decoration: none; /* 去掉超链接下划线 */
+    color: #343a40; /* 文字颜色 */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-icon {
+    width: 30px; /* 图片宽度 */
+    height: 30px; /* 图片高度 */
+    margin-right: 10px; /* 图片与文字之间的间距 */
+    animation: spin 2s linear infinite; /* 添加旋转动画 */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg); /* 起始角度 */
+    }
+    to {
+        transform: rotate(360deg); /* 结束角度 */
+    }
+}
+
+.navbar-text {
+    font-weight: bold; /* 加粗文字 */
+    font-size: 18px; /* 文字大小 */
+}
+
+.content {
+    padding: 20px; /* 内容区域的内边距 */
+}
+
+.blog-image {
+    max-width: 100%; /* 图片宽度自适应 */
+    height: auto; /* 图片高度自适应 */
+}
+
+.expandable-box {
+    display: inline - block;
+    padding: 10px 20px;
+    background - color: #007BFF;
+    color: #fff;
+    text - align: center;
+    cursor: pointer;
+    position: relative;
+    border - radius: 15px;
+    transition: all 0.5s cubic - bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.expandable-box:hover {
+    background - color: #0056b3;
+}
+
+.box-image {
+    width: 50px;
+    height: 50px;
+    border - radius: 8px;
+    margin - right: 10px;
+    vertical - align: middle;
+}
+
+.fullscreen - content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background - color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    box - sizing: border - box;
+    z - index: 1000;
+    display: flex;
+    flex - direction: column;
+    align - items: center;
+    justify - content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic - bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.fullscreen - content.show {
+    width: 80%;
+    opacity: 1;
+    visibility: visible;
+}
+
+.markdown - content {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s;
+}
+
+.fullscreen - content.show.markdown - content {
+    opacity: 1;
+}
