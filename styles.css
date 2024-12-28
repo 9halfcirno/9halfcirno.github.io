@@ -1,10 +1,11 @@
-body {
+body,htmloverflow: hidden; {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     position: absolute;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .navbar {
@@ -105,11 +106,118 @@ body {
     visibility: visible;
 }
 
-.markdown - content {
-    opacity: 0;
-    transition: opacity 0.5s ease 0.5s;
-}
 
 .fullscreen - content.show.markdown - content {
     opacity: 1;
+}
+
+.rectangle {
+    width: 150px;
+    height: 100px;
+    background-color: #F1FFFE;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
+}
+
+.rectangle img {
+     min - height: 50%;
+     margin: 0;
+     padding: 0;
+     background - size: 75% 75%;
+     background - position: center;
+     background - repeat: no - repeat;
+     background : rgba(0, 0, 0, 0.5);
+     filter: blur(4px);
+     object-fit: cover;
+}
+
+.overlay {
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    width: 75%;
+    height: 100%;
+    background - color: rgba(0, 0, 0, 0.5);
+    /* 半透明灰色背景实现页面变灰效果 */
+    display: none;
+    justify - content: center;
+    align - items: center;
+    flex - direction: column;
+    color: #000000;
+    animation: enlargeAndFadeIn 0.5s linear; /* 添加旋转动画 */
+    /* 文字颜色，可根据需求调整 */
+    font - size: 18px;
+    < z - index: 999;
+    /* 这里设置一个较高的z - index以确保在其他元素之上 */
+}
+
+.overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify - content: center;
+    align - items: center;
+    flex - direction: column;
+    background - color: white;
+    /* 其他样式属性根据需求调整 */
+    
+}
+
+.overlay-content span {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.title {
+    top: 15%;
+    left: 15%;
+}
+
+.overlay-content p {
+    top: 20%;
+    left: 15%;
+}
+
+.overlay img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 100px);
+}
+
+.expanded {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+@keyframes enlargeAndFadeIn {
+    0% {
+        font - size: 6px;
+        opacity: 0;
+    }
+
+    100% {
+        font - size: 18px;
+        opacity: 1;
+    }
 }
