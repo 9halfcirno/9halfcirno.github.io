@@ -176,7 +176,7 @@ body,htmloverflow: hidden; {
     
 }
 
-.overlay-content span {
+.overlay-content svg {
     position: absolute;
     top: 20px;
     right: 20px;
