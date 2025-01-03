@@ -12,7 +12,7 @@
     right: 5px;
     position: fixed;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+    animation: enterTop 0.9s ease;
 }
 
 .textbox {
@@ -124,6 +124,16 @@
     /* 添加过渡效果，使位置变化更平滑 */
 }
 
+.song-player {
+    bottom: -72px;
+    left: -16px;
+    position: fixed;
+    animation: enterLeft 1.5s linear;
+    border: none;
+/*    width: 14450px;
+    height: 60px;*/
+}
+
 /*动画*/
 @keyframes spin {
     from {
@@ -160,4 +170,31 @@
         top: 25%;
         /* 移动到屏幕内 */
     }
+}
+
+@keyframes enterTop {
+    0% {
+        top: -10%;
+    }
+
+    100% {
+        top: 5px;
+    }
+
+}
+
+@keyframes enterLeft {
+    0% {
+        left: -999%;
+
+    }
+
+    60% {
+        left: -250px;
+    }
+
+    100% {
+        left: -16px;
+    }
+
 }

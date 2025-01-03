@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const textboxes = document.querySelectorAll('.textbox');
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight; //* textboxes.length * 0.2;
+    const screenHeight = window.innerHeight;// + (textboxes.lenght * 0); //* textboxes.length * 0.2;
     const maxWidth = 175;
     const maxHeight = 175;
     //     github-link.style.top = screenHeight + `px`;
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         textboxes.forEach((textbox) => {
    //         const oldLeft = 0;
             const randomLeft = Math.random() * (maxWidth - minWidth) + minWidth;
-            const randomTop = Math.random() * screenHeight;
+            const randomTop = Math.random() * screenHeight + 24;
             const randomWidth = Math.random() * (maxWidth - minWidth) + minWidth;
             const randomHeight = Math.random() * (maxHeight - minHeight) + minHeight;
             textbox.style.position = 'absolute';

@@ -11,21 +11,7 @@
 </head>
 
 <body>
-    <!--这是标题栏-->
-    <div id="head">
-        <a class="head-link" href="index.html">
-            <span class="head-9">⑨</span>
-            <span class="head-text">9halfcirno的网页</span>
-        </a>
-    </div>
-    <!--上面是标题栏-->
-    <a class="github-link" href="https://github.com/9halfcirno/9halfcirno.github.io">
-        <img class="icon" src="github.png" alt="github-icon">
-        <span>9halfcirno.github.io</span>
-    </a>
-  <!--  <div class="bg">
-        <img class="bg" src="https://img.paulzzh.com/touhou/random?size=all&site=all&proxy=0">
-    </div>-->
+
     <div class="textbox">
         <a class="boxtitle" href="https://space.bilibili.com/3493133155305781">咱的b站小号</a>
         <p class="text">这是9半分cirno的小号</p>
@@ -42,20 +28,52 @@
         <a class="boxtitle" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=EXMYrr8mbKmrXVoQcfaw73HyIgghZUEf&authKey=dORb9ukMIpydkveqUUUJaHKOm6duweNAbnBpPM8rz1McNocYa6JrYOx5oixje2o7&noverify=0&group_code=7876468478">雾之湖小窝</a>
         <p class="text">有空来雾之湖玩玩！</p>
     </div>
-    
-    
-    <div class="bugs">
-    <div class="bug">!恭喜你找到了页面的bug!</div>
-    <div class="bug">当你恢复竖屏时，你会看到有的盒子们不动了！</div>
-    <div class="bug">这个页面也会变大变高！</div>
+    <div class="textbox">
+        <a class="boxtitle" href="https://bot.q.qq.com/s/9wfx2lzuf?id=102163930">qq的琪露诺ai</a>
+        <p class="text">这是咱做的baka</p>
     </div>
 
-<img id="follow-img" src="//api.ecylt.top/images/huli.gif"/>
-<script src="//api.ecylt.top/js/huli.js"></script>
+    <!--这是标题栏-->
+    <div id="head">
+        <a class="head-link" href="index.html">
+            <span class="head-9">⑨</span>
+            <span class="head-text">9halfcirno的网页</span>
+        </a>
+    </div>
+    <!--上面是标题栏-->
+    <script>
+        //咱精心准备的⑨曲列表
+        const nTracksList = [746194, 29715511, 1305367155, 751472, 1946812567, 479764535, 2090279827, 1998381448, 767450, 2625799464, 1391643922, 1811729988, 520464826, 1499093692, 22636718, 750443, 520464821];
+        //随便给你放一首
+        const randomIndex = Math.floor(Math.random() * nTracksList.length);
+        const song = nTracksList[randomIndex];
+        
+        const iframe = document.createElement('iframe');
+        // 设置src属性
+        iframe.src = 'https://music.163.com/m/outchain/player?type=2&id=' + song + '&auto=1&height=66';
+        iframe.className = 'song-player';
+        
+        // 将iframe添加到文档中（这里假设添加到body元素）
+        document.body.appendChild(iframe);
+        
+    </script>
+    <a class="github-link" href="https://github.com/9halfcirno/9halfcirno.github.io">
+        <img class="icon" src="github.png" alt="github-icon">
+        <span>9halfcirno.github.io</span>
+    </a>
+    <!--  <div class="bg">
+        <img class="bg" src="https://img.paulzzh.com/touhou/random?size=all&site=all&proxy=0">
+    </div>-->
 
+
+    <div class="bugs">
+        <div class="bug">!恭喜你找到了页面的bug!</div>
+        <div class="bug">当你恢复竖屏时，你会看到有的盒子们不动了！</div>
+        <div class="bug">这个页面也会变大变高！</div>
+    </div>
     <script src="script.js"></script>
-
-
+    <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=320 src="https://music.163.com/outchain/player?type=2&id=2652647276&auto=1&height=66"></iframe>
+-->
 </body>
 
 </html>
