@@ -1,228 +1,163 @@
-body,htmloverflow: hidden; {
-    font-family: Arial, sans-serif;
+#head {
+    /*
+    width: 95%;
+    height: 48px;*/
+    background-color: #E7F3FF;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    border-radius: 15px;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    position: fixed;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.textbox {
+    /*
+    width: 95%;
+    height: 48px;*/
+    background-color: #E7F3FF;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border - box;
+    opacity: 0.64;
+    < z - index: 9;
+
+    animation: enteralpha 0.9s linear;
+}
+
+#body {
+    top: 48px;
+    left: 5px;
+    right: 5px;
+}
+
+
+.head-link {
+    text-decoration: none;
+    /* 去掉超链接下划线 */
+    display: flex;
+    align-items: center;
+
+}
+
+.head-text {
+    font-weight: bold;
+    /* 加粗文字 */
+    font-size: 18px;
+    /* 文字大小 */
+    color: #09539D;
+}
+
+.head-9 {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #38CCFF;
+    font-weight: bold;
+    animation: spin 2s linear infinite;
+    /* 转啊转~ */
+}
+
+.bg {
+    min - height: 100%;
     margin: 0;
     padding: 0;
-    position: absolute;
+    filter: blur(2px);
+    object-fit: cover;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: auto;
+    display: inline-block;
+    border: none;
+    border-radius: 10px;
+    animation: enteralpha 0.9s linear;
 }
 
-.navbar {
+.boxtitle {
+    text-decoration: none;
+    /* 去掉超链接下划线 */
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* 靠左对齐 */
-    background-color: #f8f9fa; /* 背景色 */
-    padding: 10px 20px; /* 内边距 */
-    border-radius: 15px; /* 圆角 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影 */
+    color: #00376E font-weight: bold;
+    /* 加粗文字 */
+    font-size: 18px;
 }
 
-.navbar-link {
-    text-decoration: none; /* 去掉下划线 */
-    color: #343a40; /* 文字颜色 */
+.text {
+    font-size: 12px;
+}
+
+.github-link {
+    text-decoration: none;
+    /* 去掉超链接下划线 */
     display: flex;
     align-items: center;
+    color: #00376E font-weight: bold;
+    /* 加粗文字 */
+    font-size: 10px;
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+
 }
 
-.navbar-icon {
-    width: 30px; /* 图片宽 */
-    height: 30px; /* 图片高 */
-    margin-right: 10px; /* 图片与文字之间的间距 */
-    animation: spin 2s linear infinite; /* 添加旋转动画 */
+.icon {
+    width: 25px;
+    height: auto;
 }
 
+.bugs {
+    position: fixed;
+    /* 使用绝对定位 */
+    width: 100%;
+    /* 宽度设置为100%，可以根据需要调整 */
+    text-align: center;
+    /* 文字居中显示 */
+    top: 100%;
+    /* 初始位置在屏幕外（下方） */
+    transition: top 0.75s ease;
+    /* 添加过渡效果，使位置变化更平滑 */
+}
+
+/*动画*/
 @keyframes spin {
     from {
-        transform: rotate(0deg); /* 起始角度 */
+        transform: rotate(0deg);
+        /* 起始角度 */
     }
+
     to {
-        transform: rotate(360deg); /* 结束角度 */
+        transform: rotate(360deg);
+        /* 结束角度 */
     }
 }
 
-.navbar-text {
-    font-weight: bold; /* 加粗文字 */
-    font-size: 18px; /* 文字大小 */
-}
-
-.content {
-    padding: 20px; /* 内容区域的内边距 */
-}
-
-.blog-image {
-    max-width: 100%; /* 图片宽度自适应 */
-    height: auto; /* 图片高度自适应 */
-}
-
-.expandable-box {
-    display: inline - block;
-    padding: 10px 20px;
-    background - color: #007BFF;
-    color: #fff;
-    text - align: center;
-    cursor: pointer;
-    position: relative;
-    border - radius: 15px;
-    transition: all 0.5s cubic - bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.expandable-box:hover {
-    background - color: #0056b3;
-}
-
-.box-image {
-    width: 50px;
-    height: 50px;
-    border - radius: 8px;
-    margin - right: 10px;
-    vertical - align: middle;
-}
-
-.fullscreen - content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background - color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 20px;
-    box - sizing: border - box;
-    z - index: 1000;
-    display: flex;
-    flex - direction: column;
-    align - items: center;
-    justify - content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s cubic - bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-}
-
-.fullscreen - content.show {
-    width: 80%;
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.fullscreen - content.show.markdown - content {
-    opacity: 1;
-}
-
-.rectangle {
-    width: 150px;
-    height: 100px;
-    background-color: #F1FFFE;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease;
-}
-
-.rectangle img {
-     min - height: 50%;
-     margin: 0;
-     padding: 0;
-     background - size: 75% 75%;
-     background - position: center;
-     background - repeat: no - repeat;
-     background : rgba(0, 0, 0, 0.5);
-     filter: blur(4px);
-     object-fit: cover;
-}
-
-.overlay {
-    position: fixed;
-    top: 15%;
-    left: 15%;
-    width: 75%;
-    height: 100%;
-    background - color: rgba(0, 0, 0, 0.5);
-    /* 半透明灰色背景实现页面变灰效果 */
-    display: none;
-    justify - content: center;
-    align - items: center;
-    flex - direction: column;
-    color: #000000;
-    animation: enlargeAndFadeIn 0.5s linear; /* 添加旋转动画 */
-    /* 文字颜色，可根据需求调整 */
-    font - size: 18px;
-    < z - index: 999;
-    /* 这里设置一个较高的z - index以确保在其他元素之上 */
-}
-
-.overlay-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify - content: center;
-    align - items: center;
-    flex - direction: column;
-    background - color: white;
-    /* 其他样式属性根据需求调整 */
-    
-}
-
-.overlay-content svg {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.title {
-    top: 15%;
-    left: 15%;
-}
-
-.overlay-content p {
-    top: 20%;
-    left: 15%;
-}
-
-.overlay img {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    max-width: calc(100% - 40px);
-    max-height: calc(100% - 100px);
-}
-
-.expanded {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
-
-@keyframes enlargeAndFadeIn {
+@keyframes enteralpha {
     0% {
-        font - size: 6px;
         opacity: 0;
-    }
-    60% {
-        font - size: 8px;
-        opacity: 0;
-
     }
 
     100% {
-        font - size: 18px;
-        opacity: 1;
+        opacity: 0.64;
+    }
+}
+
+@media (orientation: portrait) {
+    .bugs {
+        top: 100%;
+        /* 保持在屏幕外 */
+    }
+}
+
+/* 横屏时的样式 */
+@media (orientation: landscape) {
+    .bugs {
+        top: 25%;
+        /* 移动到屏幕内 */
     }
 }
