@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const textboxes = document.querySelectorAll('.textbox');
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;// + (textboxes.lenght * 0); //* textboxes.length * 0.2;
+    const screenHeight = window.innerHeight + (textboxes.length * 0.2); //* textboxes.length * 0.2;
     const maxWidth = 175;
     const maxHeight = 175;
     //     github-link.style.top = screenHeight + `px`;
