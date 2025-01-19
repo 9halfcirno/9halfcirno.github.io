@@ -9,6 +9,7 @@ window.onload = function() {
             if (response) {
                 let html = await response.text();
                 content.innerHTML = html;
+                console.log(`load succeed!`)
             } else {
                 console.log(`fail to get page : ${url}`);
                 setTimeout(() => getPage(url), 500);
