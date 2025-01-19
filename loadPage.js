@@ -42,6 +42,6 @@ window.onload = function() {
     };
     
     getPage("https://9halfcirno/pages/chat.html",false)
-}
+}*/
 
 //fetch("https://9halfcirno.githib.io/pages/chat.html ").then
