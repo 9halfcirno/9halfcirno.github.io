@@ -99,7 +99,8 @@ border-radius: 4px;
 }
 
 #page {
-top: 90px;
+position: relative;
+top: 150px;
 left: 5px;
 right: 5px;
 }
