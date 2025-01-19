@@ -74,14 +74,6 @@ border-radius: 4px;
     height: auto;
 }
 
-.bugs {
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    top: 100%;
-    transition: top 0.75s ease;
-}
-
 .song-player {
     bottom: -72px;
     left: -16px;
@@ -101,7 +93,7 @@ border-radius: 4px;
     height: 100%;
     background-color: #F1F9FF;
     border-radius: 15px;
-    position: fixed;
+    position: relative;
     animation: boxEnter 1.8s ease;
     z-index: 900;
 }
@@ -133,21 +125,6 @@ right: 5px;
 
     100% {
         opacity: 0.64;
-    }
-}
-
-@media (orientation: portrait) {
-    .bugs {
-        top: 100%;
-        /* 保持在屏幕外 */
-    }
-}
-
-/* 横屏时的样式 */
-@media (orientation: landscape) {
-    .bugs {
-        top: 25%;
-        /* 移动到屏幕内 */
     }
 }
 
