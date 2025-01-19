@@ -1,1 +1,1 @@
-setTimeout(()=>console.log("hello world"),500)
+while(true){console.log("hello world");};
