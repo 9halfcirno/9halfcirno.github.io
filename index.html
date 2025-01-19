@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⑨のpage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="//api.ecylt.top/css/huli.css">
+
+</head>
+
+<body>
+    <!--这是标题栏-->
+    <div id="head">
+        <a class="head-link" href="index.html">
+            <span class="head-9">⑨</span>
+            <span class="head-text">9halfcirno的网页</span>
+        </a>
+    </div>
+    <!--上面是标题栏-->
+    <div id="box">
+        <div id="page">
+            <div id="content">现在还没有page！</div>
+        </div>
+    </div>
+    <!--用来插入dom-->
+
+    <!--  <script async>
+        //咱精心准备的⑨曲列表
+        const nTracksList = [746194, 29715511, 1305367155, 751472, 1946812567, 479764535, 2090279827, 1998381448, 767450, 2625799464, 1391643922, 1811729988, 520464826, 1499093692, 22636718, 750443, 520464821];
+        //随便给你放一首
+        const randomIndex = Math.floor(Math.random() * nTracksList.length);
+        const song = nTracksList[randomIndex];
+        
+        const iframe = document.createElement('iframe');
+        // 设置src属性
+        iframe.src = 'https://music.163.com/m/outchain/player?type=2&id=' + song + '&auto=1&height=66';
+        iframe.className = 'song-player';
+        document.body.appendChild(iframe);
+        
+    </script>-->
+    <a class="github-link" href="https://github.com/9halfcirno/9halfcirno.github.io">
+        <img class="icon" src="github.png" alt="github-icon">
+        <span>9halfcirno.github.io</span>
+    </a>
+    <!--  <div class="bg">
+        <img class="bg" src="https://img.paulzzh.com/touhou/random?size=all&site=all&proxy=0">
+    </div>-->
+
+
+    <div class="bugs">
+        <div class="bug">!恭喜你找到了页面的bug!</div>
+        <div class="bug">当你恢复竖屏时，你会看到有的盒子们不动了！</div>
+        <div class="bug">这个页面也会变大变高！</div>
+    </div>
+    <script src="loadPage.js"></script>
+
+    <script>
+        let content = document.getElementById("content");
+        content.innerHTML = '<div id="head">
+        <a class="head-link" href="index.html">
+            <span class="head-9">⑨</span>
+            <span class="head-text">9halfcirno的网页</span>
+        </a>
+</div>'
+    </script>
+    <!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=320 src="https://music.163.com/outchain/player?type=2&id=2652647276&auto=1&height=66"></iframe>
+-->
+</body>
+
+</html>
