@@ -18,6 +18,14 @@
     right: 5px;
 }
 
+.bg {
+left: 0px;
+right: 0px;
+top: 0px;
+position: fixed;
+border-radius: 4px;
+}
+
 
 .head-link {
     text-decoration: none;
