@@ -24,24 +24,4 @@ window.onload = function() {
 
 
 
-/*window.onload = function() {
-    async function getPage(url, iframe = false) {
-        url = url || "https://9halfcirno.github.io/pages/chat.html";
-        fetch(url).then(html => {
-            if (html) {
-                html = html.text;
-                let content = document.getElementById("content");
-                content.innerHTML = '${html}';
-            } else {
-                console.log(`fail to get page : ${url}`)
-                setTimeout(() => getPage(url), 500)
-            }
-        }).catch(e =>
-            console.log(`Error to get html in ${url} :`, e)
-        )
-    };
-    
-    getPage("https://9halfcirno/pages/chat.html",false)
-}*/
-
-//fetch("https://9halfcirno.githib.io/pages/chat.html ").then
+ 
