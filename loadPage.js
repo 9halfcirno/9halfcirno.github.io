@@ -1,3 +1,4 @@
+console.log("js running");
 window.onload = function() {
     async function getPage(url, iframe = false) {
         let content = document.getElementById("content");
