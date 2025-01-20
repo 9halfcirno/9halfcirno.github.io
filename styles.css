@@ -157,13 +157,16 @@ right: 5px;
 @keyframes boxEnter {
     0% {
         top: -100%;
+bottom: 100%;
     }
 
     50% {
         top: -100%;
+bottom: 100%;
     }
 o
     100% {
         top: -25px;
+bottom: 25px;
     }
 }
