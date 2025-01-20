@@ -88,9 +88,9 @@ border-radius: 4px;
 
 #box {
     position: relative; /* 使 #page 能够相对于 #box 进行定位 */
-    width: 300px; /* 假设的宽度，可根据实际需求调整 */
-    height: 200px; /* 假设的高度，可根据实际需求调整 */
-    border: 1px solid #ccc; /* 边框样式，可根据实际需求调整 */
+    width: 100%; /* 假设的宽度，可根据实际需求调整 */
+    height: 100%; /* 假设的高度，可根据实际需求调整 */
+border-radius: 8px;
     padding: 10px; /* 内边距，可根据实际需求调整 */
 }
 
@@ -102,7 +102,7 @@ border-radius: 4px;
     height: 100%;
     /* 使page内的页面相对定位 */
     position: relative;
-    overflow: hidden; /* 如果内部页面内容超出page范围，可隐藏超出部分 */
+    overflow: auto; /* 如果内部页面内容超出page范围，可隐藏超出部分 */
 }
 
 /*动画*/
