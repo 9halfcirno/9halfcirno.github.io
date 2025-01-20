@@ -38,6 +38,6 @@ window.onload = function() {
             console.log(`Error to get html in ${url} :`, e);
             target.innerHTML = '<h1>ERROR</h1>';
         }
-    }
+    };
     getPage("chat", "html");
 };
