@@ -90,7 +90,10 @@ border-radius: 4px;
     position: relative; /* 使 #page 能够相对于 #box 进行定位 */
     width: 100%; /* 假设的宽度，可根据实际需求调整 */
     height: 100%; /* 假设的高度，可根据实际需求调整 */
-border-radius: 8px;
+    background-color: #F1F9FF;
+    animation: boxEnter 1.8s ease;
+    top: -40px;
+    border-radius: 8px;
     padding: 10px; /* 内边距，可根据实际需求调整 */
 }
 
