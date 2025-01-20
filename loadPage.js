@@ -41,4 +41,6 @@ let target = document.getElementById("pageindex");
         }
     };
     getPage("chat", "html");
+    getPage("chat", "css");
+    getPage("chat", "js");
 };
