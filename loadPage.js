@@ -1,23 +1,24 @@
 console.log("js running");
 window.onload = function() {
     async function getPage(page = "home", type = "html") {
+let target = document.getElementById("pageindex");
         //获取文件
         let file = function() {
             switch (type) {
                 case "html":
-                    let target = document.getElementById("pageindex");
+                    target = document.getElementById("pageindex");
                     return "index.html";
                     break;
                 case "css":
-                    let target = document.getElementById("pagestyles");
+                    target = document.getElementById("pagestyles");
                     return "styles.css";
                     break;
                 case "js":
-                    let target = document.getElementById("pagejs");
+                    target = document.getElementById("pagejs");
                     return "script.js";
                     break;
                 default:
-                    let target = document.getElementById("pageindex");
+                    target = document.getElementById("pageindex");
                     return "index.html";
                     break;
             }
