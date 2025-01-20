@@ -40,16 +40,4 @@ window.onload = function() {
         }
     }
     getPage("chat", "html");
-}; = '<h1>FAIL:try again after 5s……</h1>';
-            }
-        } catch (e) {
-            console.log(`Error to get html in ${url} :`, e);
-            content.innerHTML = '<h1>ERROR</h1>';
-        }
-    }
-    getPage("pages/chat.html", false);
 };
-
-
-
- 
