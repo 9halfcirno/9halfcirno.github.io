@@ -87,21 +87,23 @@ border-radius: 4px;
 }
 
 #box {
-    left: 10px;
-    right: 10px;
-    top: -25px;
-    height: 100%;
-    background-color: #F1F9FF;
-    border-radius: 15px;
-    position: relative;
-    animation: boxEnter 1.8s ease;
-    z-index: 900;
+  width: 80%; /* 调整宽度为页面宽度的80%，可根据实际需求修改 */
+  margin: 0 auto; /* 水平居中 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 添加一个淡淡的阴影增加立体感 */
+  border: 1px solid #ccc; /* 增加边框 */
+  border-radius: 5px; /* 较小的边框圆角 */
+  padding: 20px; /* 增加内部填充 */
+  display: flex; /* 使用flex布局以便内部元素更好地排列，可以根据内部元素需求调整 */
+  flex-wrap: wrap; /* 允许内部元素换行 */
 }
 
 #page {
-top: 50px;
-left: 5px;
-right: 5px;
+  min-height: 80vh; /* 使用视口高度的80%作为最小高度，确保页面有一定高度 */
+  background-color: #f9f9f9; /* 较浅的背景色 */
+  display: grid; /* 使用grid布局来组织内部元素，例如头部、主体等 */
+  grid-template - rows: auto 1fr; /* 头部使用自动高度，主体占用剩余空间 */
+  grid-template - columns: 1fr; /* 只使用一列 */
+  gap: 10px; /* 网格元素之间的间距 */
 }
 
 /*动画*/
