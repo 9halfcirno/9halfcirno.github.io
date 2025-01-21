@@ -16,4 +16,5 @@ function sendMessage(event) {
     aiMessageDiv.classList.add('ai-message');
     aiMessageDiv.innerText = aiMessage;
     chatContainer.appendChild(aiMessageDiv);
+return false;
 }
