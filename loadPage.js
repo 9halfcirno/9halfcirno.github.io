@@ -34,7 +34,7 @@ window.onload = function() {
                     return '<link id="pagestyles" href=' + url + '/>';
                     break;
                 case "js":
-                    return '<script id="pagejs" src=' + url + '</script>;
+                    return '<script id="pagejs" src=' + url + '</script>';
                     break;
                 default:
                     console.error("no type")
