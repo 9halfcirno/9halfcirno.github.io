@@ -1,3 +1,4 @@
+window.onload = function(){
 console.log("page/chat/script.js")
 const sendButton = document.getElementById('chatsend');
 const inputMsg = document.getElementById('chatinput');
@@ -96,4 +97,4 @@ sendButton.addEventListener('click', () => {
     userMsg = inputMsg.value;
     chatbox.innerHTML = '<span>'+sendMsg(userMsg, chatID)+'</span>';
 inputMsg.value = "";
-});
+});};
