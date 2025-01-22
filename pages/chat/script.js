@@ -1,3 +1,4 @@
+console.log("page/chat/script.js")
 const sendButton = document.getElementById('chatsend');
 const inputMsg = document.getElementById('chatinput');
 const chatbox = document.getElementById('chatbox');
