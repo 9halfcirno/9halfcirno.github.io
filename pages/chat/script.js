@@ -92,5 +92,6 @@ sendButton.addEventListener('click', () => {
     };
 
     userMsg = inputMsg.value;
-    chatbox.innerHTML = '<span>'+sendMsg(userMsg, chatID)+'</span>'
+    chatbox.innerHTML = '<span>'+sendMsg(userMsg, chatID)+'</span>';
+inputMsg.value = "";
 });
