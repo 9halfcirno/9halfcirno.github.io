@@ -7,7 +7,8 @@ let chatID = null;
 let reply = null;
 
 sendButton.addEventListener('click', () => {
-    // 获取chatID的函数
+    console.log("button onclick")
+// 获取chatID的函数
     async function getChatID(times = 0) {
         if (chatID) {
             await fetch('https://api.ecylt.top/v1/free_gpt/chat_json.php', {
