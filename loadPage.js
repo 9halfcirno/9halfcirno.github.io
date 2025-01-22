@@ -60,6 +60,6 @@ window.onload = function() {
         }
     };
     getPage("chat", "html");
-/*    getPage("chat", "css");
-    getPage("chat", "js");*/
+//   getPage("chat", "css");
+//    getPage("chat", "js");
 };
