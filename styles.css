@@ -107,7 +107,7 @@ border-radius: 4px;
     height: 100%;
     /* 使page内的页面相对定位 */
     position: relative;
-    overflow: auto; /* 如果内部页面内容超出page范围，可隐藏超出部分 */
+    overflow-y: auto; /* 如果内部页面内容超出page范围，可隐藏超出部分 */
 }
 
 /*动画*/
