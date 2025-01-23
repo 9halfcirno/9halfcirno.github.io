@@ -93,9 +93,9 @@ border-radius: 4px;
     right: 10px; /* 扩展到视口右边，这样左右就会填充 */
     bottom: 10px; /* 扩展到视口底部，这样上下就会填充 */
     margin: 0px; /* 清除之前设置的外边距 */
-    background - color: #F1F9FF;
+    background-color: #F1F9FF;
     animation: boxEnter 1.8s ease;
-    border - radius: 8px;
+    border-radius: 8px;
     /*  padding: 10px; 内边距，可根据实际需求调整 */
 }
 
