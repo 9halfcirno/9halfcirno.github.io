@@ -91,7 +91,7 @@ border-radius: 4px;
     top: -25px; /* 调整到视口顶部 */
     left: 10px; /* 调整到视口左边 */
     right: 10px; /* 扩展到视口右边，这样左右就会填充 */
-    height: 100%
+    height: 100%;
     margin: 0px; /* 清除之前设置的外边距 */
     background-color: #F1F9FF;
     animation: boxEnter 1.8s ease;
