@@ -87,17 +87,16 @@ border-radius: 4px;
 }
 
 #box {
-    position: relative;
-    margin: 10px;
-    left: 10px;
-    right: 10px;
-    top: -25px;
-    bottom: 10px;
-/*  height: 100%;*/
-    background-color: #F1F9FF;
+    position: fixed; /* 将相对定位改为固定定位，使其相对于视口定位 */
+    top: 0; /* 调整到视口顶部 */
+    left: 0; /* 调整到视口左边 */
+    right: 0; /* 扩展到视口右边，这样左右就会填充 */
+    bottom: 0; /* 扩展到视口底部，这样上下就会填充 */
+    margin: 0; /* 清除之前设置的外边距 */
+    background - color: #F1F9FF;
     animation: boxEnter 1.8s ease;
-    border-radius: 8px;
-/*  padding: 10px; 内边距，可根据实际需求调整*/
+    border - radius: 8px;
+    /*  padding: 10px; 内边距，可根据实际需求调整 */
 }
 
 #page {
