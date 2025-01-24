@@ -59,7 +59,7 @@ window.onload = function() {
             target.innerHTML = '<h1>ERROR</h1>';
         }
     };
-    getPage("home", "html");
+    getPage("chat", "html");
 //   getPage("chat", "css");
 //    getPage("chat", "js");
 };
