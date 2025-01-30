@@ -1,0 +1,26 @@
+{
+    "pages": [
+        {
+            "name": "home",
+            "Introduction": "这里是9半分cirno的页面！\n默认就是这个页面啦……",
+            "color": null,
+            "icon": null,
+            "load": {
+                "html": "home",
+                "styles": null,
+                "javascript": null
+            }
+        },
+        {
+            "name": "chat",
+            "Introduction": "和琪露诺聊天的界面\n还没做好……",
+            "color": null,
+            "icon": null,
+            "load": {
+                "html": "chat",
+                "styles": null,
+                "javascript": null
+            }
+        }
+    ]
+}
