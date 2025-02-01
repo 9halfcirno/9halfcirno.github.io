@@ -44,7 +44,7 @@ document.addEventListener('loadPage', (event) => {
             }
         };
         target.innerHTML = '<h3>LOADING……</h3>';
-        let url = "https://9halfcirno.github.io/pages/" + page + "/" + file();
+        let url = "https://9halfcirno.github.io/pages/" + page + "/" + file() + '?random=' + Math.random();
         try {
             let response = await fetch(url);
             if (response) {
