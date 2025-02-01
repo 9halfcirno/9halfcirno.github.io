@@ -67,5 +67,5 @@ function test() {
 
 window.onload = function() {
     getPages();
-    sendPageEvent(test(), 'html');
+    sendPageEvent('dysbot', 'html');
 };
