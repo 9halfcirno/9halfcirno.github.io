@@ -1,45 +1,44 @@
-
-h3,
-h4,
-h5,
-h6,
-p,
-ul {
+h3.dysbotpage,
+h4.dysbotpage,
+h5.dysbotpage,
+h6.dysbotpage,
+p.dysbotpage,
+ul.dysbotpage {
     margin-top: 0px;
     margin-bottom: 0px;
 }
-h3 {
+h3.dysbotpage {
     margin-left: 5px;
 }
 
-h4 {
+h4.dysbotpage {
     margin-left: 10px;
 
 }
 
-h5 {
+h5.dysbotpage {
     margin-left: 15px;
 }
 
-div {
+div.dysbotpage {
     font-size: 12px;
     margin-left: 28px;
 }
 
-a {
+a.dysbotpage {
     text-decoration: none;
     color: #418CD6;
     font-weight: bold;
 }
 
-li {
+li.dysbotpage {
     font-size: 12px;
 }
 
-.bold {
+.bold.dysbotpage {
     font-weight: bold;
 }
 
-p {
+p.dysbotpage {
     font-size: 8px;
 }
