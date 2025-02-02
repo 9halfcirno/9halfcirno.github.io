@@ -1,0 +1,45 @@
+
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+h3 {
+    margin-left: 5px;
+}
+
+h4 {
+    margin-left: 10px;
+
+}
+
+h5 {
+    margin-left: 15px;
+}
+
+div {
+    font-size: 12px;
+    margin-left: 28px;
+}
+
+a {
+    text-decoration: none;
+    color: #418CD6;
+    font-weight: bold;
+}
+
+li {
+    font-size: 12px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+p {
+    font-size: 8px;
+}
