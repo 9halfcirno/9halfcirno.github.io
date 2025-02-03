@@ -65,7 +65,16 @@ function test() {
     return page;
 };
 
+function test() {
+    const url = new URL('https://9halfcirno.github.io');
+    // 获取URL的查询参数对象
+    const searchParams = new URLSearchParams(url.search);
+    // 获取page参数的值
+    let page = searchParams.get('page') || 'home';
+    return page;
+};
+
 window.onload = function() {
     getPages();
-    sendPageEvent('dysbot', 'html');
+    sendPageEvent(test(), 'html');
 };
