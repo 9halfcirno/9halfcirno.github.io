@@ -1,28 +1,33 @@
 h3.dysbotpage,
 h4.dysbotpage,
 h5.dysbotpage,
-h6.dysbotpage,
+h6.dysbotpage {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 p.dysbotpage,
 ul.dysbotpage {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
 h3.dysbotpage {
-    margin-left: 5px;
+    margin-left: 0.5em;
 }
 
 h4.dysbotpage {
-    margin-left: 10px;
+    margin-left: 1em;
 
 }
 
 h5.dysbotpage {
-    margin-left: 15px;
+    margin-left: 2em;
 }
 
 div.dysbotpage {
     font-size: 12px;
-    margin-left: 28px;
+    margin-left: 3.5em;
 }
 
 a.dysbotpage {
@@ -33,6 +38,7 @@ a.dysbotpage {
 
 li.dysbotpage {
     font-size: 12px;
+    margin-left: 1em;
 }
 
 .bold.dysbotpage {
@@ -41,4 +47,5 @@ li.dysbotpage {
 
 p.dysbotpage {
     font-size: 8px;
+    color: #313D6B;
 }
