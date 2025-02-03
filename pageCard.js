@@ -66,7 +66,7 @@ function test() {
 };
 
 function test() {
-    const url = new URL('https://9halfcirno.github.io');
+    const url = new URL(window.location.href);
     // 获取URL的查询参数对象
     const searchParams = new URLSearchParams(url.search);
     // 获取page参数的值
