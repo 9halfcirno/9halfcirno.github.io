@@ -97,6 +97,7 @@ border-radius: 4px;
     animation: boxEnter 1.8s ease;
     border-radius: 8px;
     /*  padding: 10px; 内边距，可根据实际需求调整 */
+    overflow-y: hidden;
 }
 
 #page {
