@@ -31,7 +31,7 @@ div.dysbotpage {
 }
 
 a.dysbotpage {
-    text-decoration: none;
+  /*  text-decoration: none;*/
     color: #418CD6;
     font-weight: bold;
 }
@@ -45,7 +45,17 @@ li.dysbotpage {
     font-weight: bold;
 }
 
+.command.dysbotpage {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #00981A;
+}
+
 p.dysbotpage {
     font-size: 8px;
     color: #313D6B;
+}
+
+.attention {
+    color: #B70000;
 }
