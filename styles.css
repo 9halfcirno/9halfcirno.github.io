@@ -10,15 +10,6 @@ body {
 	/* 去除默认边距 */
 	height: 100vh;
 	/* 高度占满视口 */
-	opacity: 0;
-	/* 初始隐藏 */
-	transition: opacity 0.5s ease;
-	/* 渐变显示 */
-}
-
-body.loaded {
-	opacity: 1;
-	/* 加载完成后显示 */
 }
 
 #head {
