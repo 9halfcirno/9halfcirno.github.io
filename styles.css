@@ -1,3 +1,15 @@
+img.bg {
+	background-size: cover;
+	/* 保持比例，填满屏幕 */
+	background-position: center;
+	/* 图片居中显示 */
+	background-repeat: no-repeat;
+	/* 不重复 */
+	margin: 0px;
+	/* 去除默认边距 */
+	height: 100vh;
+	/* 高度占满视口 */
+}
 
 #head {
 	/*
