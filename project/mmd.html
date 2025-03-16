@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>three.js - MMD loader</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, no-cache, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <style>
+        body {
+            color: #444;
+            background: #fff;
+        }
+        
+        a {
+            color: #08f;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay">
+        <!-- <button id="startButton" class="funcbutton">Play</button> -->
+
+    </div>
+    <div id="menu">
+        <div id="menutitle">
+            MENU -- 菜单
+            <!-- <button id="hidden">HIDDEN</button> -->
+        </div>
+        <div class="settings">
+            -此框中每一项都必填，否则无法播放
+            <div class="name">
+                模型url
+            </div>
+            <input type="text" id="model" class="input"></input>
+
+            <div class="name">
+                模型动画url
+            </div>
+            <input type="text" id="anmodel" class="input"></input>
+
+            <div class="name">
+                镜头动画url
+            </div>
+            <input type="text" id="ancamera" class="input"></input>
+
+            <div class="name">
+                音乐url
+            </div>
+            <input type="text" id="audio" class="input"></input>
+
+        </div>
+        <div class="settings">
+            <div class="name">
+                尺寸
+            </div>
+            <input type="number" id="size" class="input"></input>
+        </div>
+        <!-- <div class="settings parallel"> -->
+        <!-- <div class="box"> -->
+        <!-- <div class="name"> -->
+        <!-- x.scale -->
+        <!-- </div> -->
+        <!-- <input type="text" id="x-scale" class="input"></input> -->
+        <!-- </div> -->
+        <!-- <div class="box"> -->
+        <!-- <div class="name"> -->
+        <!-- y.scale -->
+        <!-- </div> -->
+        <!-- <input type="text" id="y-scale" class="input"></input> -->
+        <!-- </div> -->
+        <!-- <div class="box"> -->
+        <!-- <div class="name"> -->
+        <!-- z.scale -->
+        <!-- </div> -->
+        <!-- <input type="text" id="z-scale" class="input"></input> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div id="choice">
+            <button id="startButton" class="funcbutton" onclick="updateMMDinfo()">Play</button>
+            <!-- <button id="update" class="funcbutton" onclick="updateMMDinfo()">update</button> -->
+        </div>
+    </div>
+    <div id="text" style="position: fixed;top: -1000%;font-size: 5px;">琪露诺！</br>音乐是ai换的音色</br>模型是miy式琪露诺</br>借物表嘛……我啥都不知道怎么写借物表</div>
+    <script src="ammo.js"></script>
+    <script src="changedThree.js"></script>
+</body>
+
+</html>

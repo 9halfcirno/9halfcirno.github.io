@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Monospace;
+    font-size: 13px;
+    line-height: 24px;
+    overscroll-behavior: none;
+}
+
+.lil-gui {
+    z-index: 2 !important;
+    /* TODO Solve this in HTML */
+}
+
+@media all and (max-width: 640px) {
+    .lil-gui.root {
+        right: auto;
+        top: auto;
+        max-height: 50%;
+        max-width: 80%;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.funcbutton {
+    background: transparent;
+    border: 0;
+    border: 1px solid #C2EBFF;
+    border-radius: 4px;
+    color: #45C6FF;
+    padding: 12px 18px;
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#notSupported {
+    width: 50%;
+    margin: auto;
+    background-color: #f00;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#menu {
+    top: 25px;
+    right: 15px;
+    left: 15px;
+    max-height: 75%;
+    background-color: #FBFFFF;
+    position: fixed;
+    border-radius: 8px;
+    border: 1px solid #83CED7;
+    padding: 10px;
+    opacity: 0.8;
+    /*display: none;*/
+    overflow-y: auto;
+    transition: top 1.5s ease;
+    transition: opacity 2.5s ease;
+}
+
+#menutitle {
+    font-weight: ;
+    font-size: 24px;
+}
+
+.settings {
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-right: 2px solid #D7D7D7;
+    border-bottom: 2px solid #D7D7D7;
+    background-color: #EFEFEF;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.input {
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 2px solid #D7D7D7;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.ok {
+    background-color: #F1F1F1;
+    border: none;
+    border: 2px solid #D7D7D7;
+    border-radius: 4px;
+}
+
+.parallel {
+    display: flex;
+    gap: 10px;
+}
+
+.parallel input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    box-sizing = border-box;
+}
