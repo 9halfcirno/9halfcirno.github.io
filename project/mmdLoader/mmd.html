@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MMD Web Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, no-cache, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- 添加后处理库 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/effects/OutlineEffect.js"></script>
+    <!-- MMD 必需依赖 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/CCDIKSolver.js"></script>
+    <script src="libs/ammo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/MMDAnimationHelper.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/MMDPhysics.js"></script>
+    <!-- MMD 加载器 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MMDLoader.js"></script>
+    <script src="libs/mmdparser.min.js"></script>
+</head>
+
+<body>
+    <div id="three-output"></div>
+    <div id="mainmenu" class="menu">
+        <div class="menutitle">MENU -- 菜单</div>
+        <!-- <div class="settings"> -->
+        <!-- -此框中每一项都必填，否则无法播放 -->
+        <!-- <div class="name"> -->
+        <!-- 模型url -->
+        <!-- </div> -->
+        <!-- <input type="text" id="model" class="input"></input> -->
+        <!--  -->
+        <!-- <div class="name"> -->
+        <!-- 模型动画url -->
+        <!-- </div> -->
+        <!-- <input type="text" id="anmodel" class="input"></input> -->
+        <!--  -->
+        <!-- <div class="name"> -->
+        <!-- 镜头动画url -->
+        <!-- </div> -->
+        <!-- <input type="text" id="ancamera" class="input"></input> -->
+        <!--  -->
+        <!-- <div class="name"> -->
+        <!-- 音乐url -->
+        <!-- </div> -->
+        <!-- <input type="text" id="audio" class="input"></input> -->
+        <!--  -->
+        <!-- </div> -->
+        <!-- <div class="settings"> -->
+        <!-- <div class="name"> -->
+        <!-- 尺寸 -->
+        <!-- </div> -->
+        <!-- <input type="number" id="size" class="input"></input> -->
+        <!--  -->
+        <!--  -->
+        <!-- </div> -->
+        <div id="choice">
+            <button id="startButton" class="funcbutton">load model</button>
+        </div>
+    </div>
+    <div id="ctrlmenu" class="menu">
+        <div class="menutitle">CTRL -- 控制</div>
+        <button id="playMusic" class="funcbutton">PLAY</button>
+        <input type="radio" value="anCamera" name="cam">动画相机
+        <input type="radio" value="camera" name="cam" checked>观察相机
+    </div>
+    <div id="loading">
+        LOADING…
+        <div>50/100</div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

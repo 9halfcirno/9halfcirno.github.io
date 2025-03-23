@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    background-color: #FFFFFF;
+    font-family: Monospace;
+    font-size: 13px;
+    line-height: 24px;
+    overscroll-behavior: none;
+    color: #444;
+}
+
+#three-output {
+    top: -100%;
+    position: fixed;
+    border-radius: 4px;
+    overflow-y: hidden;
+    transition: top 2s ease;
+}
+
+.funcbutton {
+    background: transparent;
+    border: 0;
+    border: 1px solid #C2EBFF;
+    border-radius: 4px;
+    color: #45C6FF;
+    padding: 12px 18px;
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu {
+    right: 15px;
+    left: 15px;
+    background-color: #FBFFFF;
+    position: fixed;
+    border-radius: 8px;
+    border: 1px solid #83CED7;
+    padding: 10px;
+    opacity: 0.9;
+    overflow-y: auto;
+    transition: all 1.25s ease;
+}
+
+#mainmenu {
+    top: 5px;
+    max-height: 75%;
+}
+
+#ctrlmenu {
+    top: 5px;
+    max-height: 100%;
+}
+
+.menutitle {
+    font-weight: ;
+    font-size: 24px;
+}
+
+.settings {
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-right: 2px solid #D7D7D7;
+    border-bottom: 2px solid #D7D7D7;
+    background-color: #EFEFEF;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.input {
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 2px solid #D7D7D7;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.ok {
+    background-color: #F1F1F1;
+    border: none;
+    border: 2px solid #D7D7D7;
+    border-radius: 8px;
+}
+
+.parallel {
+    display: flex;
+    gap: 10px;
+}
+
+.parallel input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #CFCFCF;
+    font-size: 24px;
+    opacity: 0.8;
+    text-align: center;
+    line-height: 4em;
+    z-index=99999;
+    transition: top 0.5s ease;
+}
+
+#loading div {
+    background-color: #BCBCBC;
+    color: #FFFFFF;
+    width: 50%;
+    height: auto;
+    max-height: 75%;
+    margin: 0 auto;
+}
