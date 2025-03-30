@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ThreeMMD</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, no-cache, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="ae.css">
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/stats.min.js"></script>
+	<!-- 添加后处理库 -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/effects/OutlineEffect.js"></script>
+	<!-- MMD 必需依赖 -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/CCDIKSolver.js"></script>
+	<script src="libs/ammo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/MMDAnimationHelper.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/animation/MMDPhysics.js"></script>
+	<!-- MMD 加载器 -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MMDLoader.js"></script>
+	<script src="libs/mmdparser.min.js"></script>
+</head>
+
+<body>
+	<div id="three-output"></div>
+
+	<div id="ctrlmenu" class="menu">
+		<div class="menutitle">CTRL -- 控制</div>
+		<div class="settings">
+			<div class="name">
+				ctrl.x
+			</div>
+			<div class="parallel">
+				<input id="ctrl-x" class="ctrl-range" type="range" max="180" min="-180" step="0.5" />
+				<div class="num"></div>
+			</div>
+			<div class="name">
+				ctrl.y
+			</div>
+			<div class="parallel">
+				<input id="ctrl-y" class="ctrl-range" type="range" max="180" min="-180" step="0.5" />
+				<div class="num"></div>
+			</div>
+			<div class="name">
+				ctrl.z
+			</div>
+			<div class="parallel">
+				<input id="ctrl-z" class="ctrl-range" type="range" max="180" min="-180" step="0.5" />
+				<div class="num"></div>
+			</div>
+		</div>
+		<div id="ctrl" class="settings high-fixed list"></div>
+		<!-- <button id="play" class="funcbutton">PLAY</button> -->
+		<button id="reset" class="funcbutton">reset</button>
+		<!-- <button id="playAnimation" class="funcbutton">START</button> -->
+		<button id="hidden-switch" class="funcbutton">back</button>
+	</div>
+
+	<div id="modelmenu" class="menu">
+		<div class="menutitle">MODELS -- 模型</div>
+		<div class="settings">
+			<div class="name">
+				从url加载模型
+			</div>
+			<input type="text" id="model-load-url" class="input"></input>
+			<div class="name">
+				命名
+			</div>
+			<input type="text" id="model-load-name" class="input"></input>
+			</br>
+			<button id="load-model" class="funcbutton">OK</button>
+			<button id="ctrl-model" class="funcbutton">CTRL</button>
+		</div>
+		<div class="settings">
+			<div class="name">
+				模型列表
+			</div>
+			<div id="model-list" class="list"></div>
+		</div>
+	</div>
+	<script src="ae.js"></script>
+</body>
+
+</html>
