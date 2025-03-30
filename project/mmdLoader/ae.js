@@ -323,7 +323,7 @@ let main = function() {
 				name: doc.idGet('model-load-name').value,
 				physics: true,
 				physicsP: {
-					maxStepNum: 20
+					maxStepNum: 40
 				}
 			});
 		});
