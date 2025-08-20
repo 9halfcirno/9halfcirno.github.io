@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片颜色归一量化工具 - by deepseek</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #9b59b6);
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 20px 0 15px;
+            color: #2c3e50;
+            font-size: 2.2rem;
+        }
+        
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .upload-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .upload-box {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .upload-box:hover {
+            border-color: #3498db;
+            background-color: #e8f4fc;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .upload-box h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .upload-box h3 i {
+            color: #3498db;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+        }
+        
+        .file-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(52, 152, 219, 0.4);
+        }
+        
+        .preview {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 200px;
+            display: none;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .palette-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        
+        .color-box:hover {
+            transform: scale(1.1);
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .controls {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .button-section {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .process-btn {
+            padding: 16px 45px;
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(46, 204, 113, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .process-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(46, 204, 113, 0.4);
+        }
+        
+        .process-btn:disabled {
+            background: linear-gradient(to right, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .result-box {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .result-box h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .canvas-container {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            padding: 12px 25px;
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(155, 89, 182, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(155, 89, 182, 0.4);
+        }
+        
+        .instructions {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .instructions code {
+            background-color: #e8f4fc;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .upload-section, .result-section {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .process-btn {
+                padding: 14px 35px;
+                font-size: 16px;
+            }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-palette"></i> 图片颜色量化与相似色归一工具</h1>
+        <p class="description">上传图片和色板文件，将图片颜色映射到色板中指定的颜色，并可合并相似颜色</p>
+        
+        <div class="upload-section">
+            <div class="upload-box">
+                <h3><i class="fas fa-image"></i> 上传图片</h3>
+                <label for="image-upload" class="file-label"><i class="fas fa-upload"></i> 选择图片</label>
+                <input type="file" id="image-upload" class="file-input" accept="image/*">
+                <img id="image-preview" class="preview" alt="图片预览">
+            </div>
+            
+            <div class="upload-box">
+                <h3><i class="fas fa-paint-brush"></i> 上传色板文件</h3>
+                <label for="palette-upload" class="file-label"><i class="fas fa-upload"></i> 选择色板文件</label>
+                <input type="file" id="palette-upload" class="file-input" accept=".txt">
+                <div id="palette-preview" class="palette-preview"></div>
+                <div id="palette-info"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3><i class="fas fa-sliders-h"></i> 相似色合并程度</h3>
+                <div class="slider-container">
+                    <span>低</span>
+                    <input type="range" min="0" max="100" value="30" class="slider" id="merge-level">
+                    <span>高</span>
+                    <span class="slider-value" id="merge-value">30%</span>
+                </div>
+                <p style="margin-top: 10px; color: #7f8c8d; font-size: 0.9rem;">调整滑块控制相似颜色的合并程度，值越高合并的颜色越多</p>
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px;">处理中，请稍候...</p>
+        </div>
+        
+        <div class="button-section">
+            <button id="process-btn" class="process-btn" disabled><i class="fas fa-cogs"></i> 处理图片</button>
+        </div>
+        
+        <div class="result-section">
+            <div class="result-box">
+                <h3><i class="fas fa-image"></i> 原始图片</h3>
+                <div class="canvas-container">
+                    <canvas id="original-canvas"></canvas>
+                </div>
+            </div>
+            
+            <div class="result-box">
+                <h3><i class="fas fa-paint-brush"></i> 量化后的图片</h3>
+                <div class="canvas-container">
+                    <canvas id="result-canvas"></canvas>
+                </div>
+                <button id="download-btn" class="download-btn" disabled><i class="fas fa-download"></i> 下载图片</button>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+            <ul>
+                <li>色板文件应为文本文件，每行包含一个RGB颜色值（不带#的十六进制，例如：<code>FF0000</code> 表示红色）</li>
+                <li>支持的图片格式：JPG, PNG, BMP, GIF</li>
+                <li>使用相似色合并滑块可以控制颜色合并的程度，值越高合并的颜色越多</li>
+                <li>处理大图片可能需要一些时间，请耐心等待</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // DOM元素
+        const imageUpload = document.getElementById('image-upload');
+        const paletteUpload = document.getElementById('palette-upload');
+        const imagePreview = document.getElementById('image-preview');
+        const palettePreview = document.getElementById('palette-preview');
+        const paletteInfo = document.getElementById('palette-info');
+        const mergeLevel = document.getElementById('merge-level');
+        const mergeValue = document.getElementById('merge-value');
+        const processBtn = document.getElementById('process-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const originalCanvas = document.getElementById('original-canvas');
+        const resultCanvas = document.getElementById('result-canvas');
+        const loading = document.getElementById('loading');
+        
+        // 获取Canvas上下文
+        const originalCtx = originalCanvas.getContext('2d');
+        const resultCtx = resultCanvas.getContext('2d');
+        
+        // 全局变量
+        let originalImage = null;
+        let paletteColors = [];
+        
+        // 监听图片上传
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file || !file.type.match('image.*')) {
+                alert('请选择有效的图片文件！');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                
+                // 加载图片到canvas
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    // 设置canvas尺寸
+                    originalCanvas.width = originalImage.width;
+                    originalCanvas.height = originalImage.height;
+                    resultCanvas.width = originalImage.width;
+                    resultCanvas.height = originalImage.height;
+                    
+                    // 绘制原始图片
+                    originalCtx.drawImage(originalImage, 0, 0);
+                    
+                    // 如果已经有色板，启用处理按钮
+                    updateProcessButtonState();
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        // 监听色板文件上传
+        paletteUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file || !file.type.match('text.*')) {
+                alert('请选择有效的文本文件！');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                parsePaletteFile(content);
+                updateProcessButtonState();
+            };
+            reader.readAsText(file);
+        });
+        
+        // 监听合并程度滑块变化
+        mergeLevel.addEventListener('input', function() {
+            mergeValue.textContent = `${this.value}%`;
+        });
+        
+        // 解析色板文件
+        function parsePaletteFile(content) {
+            paletteColors = [];
+            palettePreview.innerHTML = '';
+            
+            const lines = content.split('\n');
+            let validColors = 0;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.length === 0) continue; // 跳过空行
+                
+                // 验证是否为6位十六进制颜色值
+                if (/^[0-9A-Fa-f]{6}$/.test(line)) {
+                    paletteColors.push('#' + line.toUpperCase());
+                    validColors++;
+                    
+                    // 创建颜色预览
+                    const colorBox = document.createElement('div');
+                    colorBox.className = 'color-box';
+                    colorBox.style.backgroundColor = '#' + line;
+                    colorBox.title = '#' + line;
+                    palettePreview.appendChild(colorBox);
+                }
+            }
+            
+            if (validColors === 0) {
+                paletteInfo.textContent = '未找到有效的颜色值';
+                paletteInfo.style.color = '#e74c3c';
+            } else {
+                paletteInfo.textContent = `找到 ${validColors} 个颜色`;
+                paletteInfo.style.color = '#27ae60';
+            }
+        }
+        
+        // 更新处理按钮状态
+        function updateProcessButtonState() {
+            processBtn.disabled = !(originalImage && paletteColors.length > 0);
+        }
+        
+        // 处理按钮点击事件
+        processBtn.addEventListener('click', function() {
+            if (!originalImage || paletteColors.length === 0) return;
+            
+            processBtn.disabled = true;
+            processBtn.textContent = '处理中...';
+            loading.style.display = 'block';
+            
+            // 使用setTimeout让UI有机会更新
+            setTimeout(function() {
+                quantizeImage();
+                processBtn.disabled = false;
+                processBtn.textContent = '处理图片';
+                downloadBtn.disabled = false;
+                loading.style.display = 'none';
+            }, 100);
+        });
+        
+        // 图片量化函数
+        function quantizeImage() {
+            const width = originalImage.width;
+            const height = originalImage.height;
+            
+            // 获取原始图像数据
+            const imageData = originalCtx.getImageData(0, 0, width, height);
+            const data = imageData.data;
+            
+            // 准备目标图像数据
+            const resultData = resultCtx.createImageData(width, height);
+            
+            // 预处理色板，转换为RGB数组
+            const paletteRgb = paletteColors.map(hexToRgb);
+            
+            // 获取合并程度
+            const mergeFactor = mergeLevel.value / 100;
+            
+            // 对每个像素进行颜色量化
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const a = data[i + 3];
+                
+                // 找到最接近的颜色
+                const closestColor = findClosestColor(r, g, b, paletteRgb, mergeFactor);
+                
+                // 设置结果像素
+                resultData.data[i] = closestColor.r;
+                resultData.data[i + 1] = closestColor.g;
+                resultData.data[i + 2] = closestColor.b;
+                resultData.data[i + 3] = a;
+            }
+            
+            // 绘制结果图像
+            resultCtx.putImageData(resultData, 0, 0);
+        }
+        
+        // 将十六进制颜色转换为RGB对象
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 0, g: 0, b: 0 };
+        }
+        
+        // 计算两个颜色之间的欧几里得距离（平方）
+        function colorDistanceSquared(r1, g1, b1, r2, g2, b2) {
+            const dr = r1 - r2;
+            const dg = g1 - g2;
+            const db = b1 - b2;
+            return dr * dr + dg * dg + db * db;
+        }
+        
+        // 找到最接近的颜色
+        function findClosestColor(r, g, b, palette, mergeFactor) {
+            let minDistance = Infinity;
+            let closestColor = null;
+            
+            for (let i = 0; i < palette.length; i++) {
+                const color = palette[i];
+                
+                // 应用合并因子，使相似颜色更容易匹配
+                const adjustedR = Math.floor(color.r + (r - color.r) * mergeFactor);
+                const adjustedG = Math.floor(color.g + (g - color.g) * mergeFactor);
+                const adjustedB = Math.floor(color.b + (b - color.b) * mergeFactor);
+                
+                const distance = colorDistanceSquared(r, g, b, adjustedR, adjustedG, adjustedB);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestColor = color;
+                }
+            }
+            
+            return closestColor;
+        }
+        
+        // 下载按钮点击事件
+        downloadBtn.addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.download = 'quantized-image.png';
+            link.href = resultCanvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>
