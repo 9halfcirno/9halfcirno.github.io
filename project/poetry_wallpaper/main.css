@@ -1,0 +1,145 @@
+@font-face {
+	font-family: "t";
+	src: url(./t.ttf) format("truetype")
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "t", "ZCOOL XiaoWei", serif;
+	background: #f7f3e9 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+	color: #2c2c2c;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+}
+
+canvas {
+	position: fixed;
+}
+
+/* ========== 诗歌卡片 ========== */
+#poetry {
+	background: rgba(255, 255, 255, 0.5);
+	border: 1px solid #d5c8b6;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	padding: 1.5rem 1.5rem;
+	border-radius: 12px;
+	text-align: center;
+	max-width: 70%;
+	animation: fadeIn 1.2s ease;
+	position: relative;
+	top: -1rem;
+}
+
+/* 顶部小印章装饰 */
+#poetry:before {
+	position: absolute;
+	top: -20px;
+	right: 20px;
+	font-size: 1.8rem;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-family: "ZCOOL XiaoWei", serif;
+	letter-spacing: 2px;
+	transform: rotate(-8deg);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.shi:before {
+	content: "詩";
+	background: #c0392b;
+	color: #fff;
+}
+
+.chii:before {
+	content: "詞";
+	background: #C0A82B;
+	color: #fff;
+}
+
+.fadeInTrigger {
+	animation: fadeIn 1.2s ease;
+}
+
+/* ========== 内容样式 ========== */
+#title {
+	font-size: 2.6rem;
+	letter-spacing: 4px;
+	margin-bottom: 0.4rem;
+	color: #222;
+	text-align: center;
+}
+
+#dynasty,
+#author {
+	font-size: 2rem;
+	color: #666;
+}
+
+#content {
+	margin-top: 0.4rem;
+}
+
+.s {
+	font-size: 2.35rem;
+	text-align: center;
+	line-height: 2;
+	transition: color 0.3s ease;
+}
+
+.s:hover {
+	color: #7b5e2a;
+}
+
+.chi {
+	text-align: left;
+}
+
+.chi:before {
+	content: "　　";
+}
+
+/* ========== 动画效果 ========== */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* 响应式优化 */
+@media (max-width: 500px) {
+	#poetry {
+		padding: 0.8rem 1rem;
+	}
+
+	#title {
+		font-size: 1.6rem;
+	}
+
+	#dynasty,
+	#author {
+		font-size: 0.8rem;
+		color: #666;
+	}
+
+	.s {
+		font-size: 1.4rem;
+	}
+
+	#poetry:before {
+		font-size: 1rem;
+	}
+}
