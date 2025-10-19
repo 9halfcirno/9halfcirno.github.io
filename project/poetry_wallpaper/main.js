@@ -76,10 +76,10 @@ function setPoetry() {
 		console.log("已获取古诗: ", r);
 		let title = r.data.origin.title || "无题";
 		let content = r.data.origin.content;
-		if (content.length > 8 || content.join("").length > 128) {
+		/*if (content.length > 8 || content.join("").length > 128) {
 			setPoetry();
 			return;
-		}
+		}*/
 		let dynasty = r.data.origin.dynasty || "未知";
 		let name = r.data.origin.author || "佚名";
 		let html = `<strong id="title">${title}</strong>
@@ -105,7 +105,8 @@ function setPoetry() {
 这		ele_poetry.classList.remove('fadeInTrigger'); // 清除旧动画类
 是		void ele_poetry.offsetWidth; // 强制浏览器重绘
 没		ele_poetry.classList.add('fadeInTrigger'); // 重新添加动画类
-用*/	})
+用*/
+	})
 }
 
 // 获取主容器
@@ -114,6 +115,18 @@ const ele_content = document.getElementById("content");
 
 setPoetry();
 setInterval(setPoetry, 600000) // 10min刷新
+
+let refresh = document.getElementById("refresh");
+let lastRefreshTime = 0;
+refresh.onclick = () => {
+	if (Date.now() - lastRefreshTime < 10000) return; // 防止频繁刷新
+	lastRefreshTime = Date.now();
+	setPoetry();
+	refresh.classList.add("rotation");
+	setTimeout(() => {
+		refresh.classList.remove("rotation");
+	}, 900)
+};
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -177,7 +190,7 @@ function updateBall() {
 
 	drawBall();
 	if (Math.random() < 0.01) {
-		const r = (0.02 + 0.06 * Math.random()) * window.innerHeight; // 半径 10-30
+		const r = (0.02 + 0.06 * Math.random()) * Math.sqrt(window.innerHeight ** 2 + window.innerWidth ** 2); // 半径 10-30
 		const x = Math.random() * (canvas.width - r * 2) + r;
 		const y = canvas.height + r; // 从底部开始
 		addBall(r, x, y);

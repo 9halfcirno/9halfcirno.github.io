@@ -18,11 +18,13 @@ body {
 	align-items: center;
 	justify-content: center;
 	padding: 2rem;
+	overflow: hidden;
 }
 
 canvas {
 	position: fixed;
 }
+
 
 /* ========== 诗歌卡片 ========== */
 #poetry {
@@ -90,7 +92,7 @@ canvas {
 .s {
 	font-size: 2.35rem;
 	text-align: center;
-	line-height: 2;
+	line-height: 1.5;
 	transition: color 0.3s ease;
 }
 
@@ -119,6 +121,18 @@ canvas {
 	}
 }
 
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+		/* 起始角度 */
+	}
+
+	to {
+		transform: rotate(360deg);
+		/* 结束角度 */
+	}
+}
+
 /* 响应式优化 */
 @media (max-width: 500px) {
 	#poetry {
@@ -142,4 +156,18 @@ canvas {
 	#poetry:before {
 		font-size: 1rem;
 	}
+}
+
+#refresh {
+	position: fixed;
+	right: 0;
+	top: 0;
+	font-family: serif;
+	font-size: 3.6rem;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.rotation {
+	animation: spin 0.9s ease;
 }
