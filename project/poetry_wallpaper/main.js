@@ -76,7 +76,7 @@ function setPoetry() {
 		console.log("已获取古诗: ", r);
 		let title = r.data.origin.title || "无题";
 		let content = r.data.origin.content;
-		if (content.length > 12 || content.join("").length > 256) {
+		if (content.length > 8 || content.join("").length > 256) {
 			setPoetry();
 			return;
 		}
