@@ -8,7 +8,7 @@ function createEle(ele, id, cN) {
 function classifyPoetry(title, lines) {
 	// 常见词牌名
 	const ciPai = ['如梦令', '浣溪沙', '菩萨蛮', '水调歌头', '念奴娇', '沁园春', '蝶恋花', '满江红', '临江仙', '鹧鸪天', '虞美人', '清平乐', '西江月', '浪淘沙', '卜算子', '江城子', '点绛唇', '踏莎行'];
-	//if (title.slice(0, 6).includes("·")) return "词";
+	if (title.slice(0, 6).includes("·")) return "词";
 	// 清理行数组，只保留非空行
 	const validLines = lines.filter(line => line.trim().length > 0);
 
