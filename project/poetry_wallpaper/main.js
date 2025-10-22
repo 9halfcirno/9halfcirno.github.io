@@ -28,7 +28,7 @@ function classifyPoetry(title, lines) {
 	let ciScore = 0;
 
 	// 1. 词牌名检测
-	const hasCiPai = ciPai.some(ci => lines[0].includes(ci));
+	const hasCiPai = ciPai.some(ci => title.includes(ci));
 	if (hasCiPai) ciScore += 3;
 
 	// 2. 句子长度整齐度判断
@@ -114,7 +114,7 @@ const ele_poetry = document.getElementById("poetry");
 const ele_content = document.getElementById("content");
 
 setPoetry();
-setInterval(setPoetry, 600000) // 10min刷新
+setInterval(setPoetry, 3600000) // 40min刷新
 
 let refresh = document.getElementById("refresh");
 let lastRefreshTime = 0;
