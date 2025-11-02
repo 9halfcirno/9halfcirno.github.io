@@ -1,3 +1,9 @@
+:root {
+	--bg-color: #F8F5EF;
+	--box-border-color: #d5c8b6;
+	--poety-onhover-color: #7b5e2a;
+}
+
 @font-face {
 	font-family: "t";
 	src: url(./t.ttf) format("truetype")
@@ -10,8 +16,9 @@
 }
 
 body {
-	font-family: "t", serif;
-	background: #f7f3e9 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+	font-family: "t", "Noto Serif SC", serif;
+	background: var(--bg-color);
+	/*background: var(--bg-color) url('https://www.transparenttextures.com/patterns/paper-fibers.png');*/
 	color: #2c2c2c;
 	height: 100vh;
 	display: flex;
@@ -25,11 +32,22 @@ canvas {
 	position: fixed;
 }
 
+#tip-box {
+	top: 0;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	color: #7F7F7F;
+}
+
+.tip {
+
+}
 
 /* ========== 诗歌卡片 ========== */
 #poetry {
 	background: rgba(255, 255, 255, 0.5);
-	border: 1px solid #d5c8b6;
+	border: 1px solid var(--box-border-color);
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 	padding: 1.5rem 1.5rem;
 	border-radius: 12px;
@@ -38,15 +56,27 @@ canvas {
 	animation: fadeIn 1.2s ease;
 	position: relative;
 	top: -1rem;
+	backdrop-filter: blur(5px);
+}
+
+.locked {
+	outline: 2px solid #CE7A1C;
+}
+
+.locked:after {
+	content: "L";
+	position: absolute;
+	bottom: 0;
+	font-size: 1rem;
 }
 
 /* 顶部小印章装饰 */
-#poetry:before {
+#symbol {
 	position: absolute;
-	top: -20px;
+	top: -14px;
 	right: 20px;
-	font-size: 1.8rem;
-	padding: 4px 8px;
+	font-size: 2rem;
+	padding: 4px 6px;
 	border-radius: 4px;
 	font-family: "ZCOOL XiaoWei", serif;
 	letter-spacing: 2px;
@@ -54,14 +84,12 @@ canvas {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-.shi:before {
-	content: "詩";
+.sy-shi {
 	background: #c0392b;
 	color: #fff;
 }
 
-.chii:before {
-	content: "詞";
+.sy-chi {
 	background: #C0A82B;
 	color: #fff;
 }
@@ -97,7 +125,7 @@ canvas {
 }
 
 .s:hover {
-	color: #7b5e2a;
+	color: var(--poety-onhover-color);
 }
 
 .chi {
@@ -118,6 +146,17 @@ canvas {
 	to {
 		opacity: 1;
 		transform: translateY(0);
+	}
+}
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+
+	to {
+		opacity: 0;
+		transform: translateY(15px);
 	}
 }
 
@@ -153,7 +192,7 @@ canvas {
 		font-size: 1.4rem;
 	}
 
-	#poetry:before {
+	#symbol {
 		font-size: 1rem;
 	}
 }
@@ -170,4 +209,281 @@ canvas {
 
 .rotation {
 	animation: spin 0.9s ease;
+}
+
+#setting-icon {
+	position: fixed;
+	left: 0;
+	top: 0;
+	font-family: serif;
+	font-size: 3.6rem;
+	font-weight: bold;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+#setting {
+	display: flex;
+	position: fixed;
+	flex-direction: column;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(5px);
+	border: 1px solid var(--box-border-color);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	padding: 1rem 1.5rem;
+	border-radius: 12px;
+	max-width: 90%;
+	max-height: 80%;
+	animation: fadeIn 0.6s ease;
+	top: 1rem;
+	left: 15px;
+	overflow-y: scroll;
+	
+}
+
+
+.setting-item {
+	padding: 12px;
+}
+
+.setting-item label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 600;
+	color: #333;
+	font-size: 1rem;
+}
+
+/* 输入框样式 */
+.setting-item input[type="text"],
+.setting-item input[type="number"] {
+	width: 100%;
+	padding: 6px 8px;
+	border: 2px solid var(--box-border-color);
+	border-radius: 6px;
+	font-size: 14px;
+	transition: all 0.2s ease;
+	background-color: white;
+	box-sizing: border-box;
+}
+
+.setting-item input[type="text"]:focus,
+.setting-item input[type="number"]:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.setting-item input[type="text"]::placeholder {
+	color: #6c757d;
+	opacity: 0.7;
+}
+
+/* 选择项样式 */
+.select-container {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.select-container button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 20px;
+	background-color: #e9ecef;
+	color: #495057;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.select-container button:hover {
+	background-color: #dee2e6;
+	transform: translateY(-1px);
+}
+
+.select-container button.active {
+	background-color: #007bff;
+	color: white;
+	box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+/* 滑条容器 */
+.slider-container {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+/* 自定义滑条样式 */
+.slider-container input[type="range"] {
+	flex: 1;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 6px;
+	background: #e1e5e9;
+	border-radius: 10px;
+	outline: none;
+}
+
+/* 滑条轨道 - Webkit浏览器 */
+.slider-container input[type="range"]::-webkit-slider-track {
+	height: 6px;
+	background: #e1e5e9;
+	border-radius: 10px;
+	border: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	background: #007bff;
+	border-radius: 50%;
+	cursor: pointer;
+	border: 2px solid white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: all 0.2s ease;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+	transform: scale(1.1);
+	background: #0056b3;
+}
+
+/* 滑条轨道 - Firefox */
+.slider-container input[type="range"]::-moz-range-track {
+	height: 6px;
+	background: #e1e5e9;
+	border-radius: 10px;
+	border: none;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	background: #007bff;
+	border-radius: 50%;
+	cursor: pointer;
+	border: 2px solid white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: all 0.2s ease;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb:hover {
+	transform: scale(1.1);
+	background: #0056b3;
+}
+
+/* 滑条值显示 */
+.slider-container span {
+	min-width: 30px;
+	text-align: center;
+	font-weight: 600;
+	color: #495057;
+	font-size: 14px;
+}
+
+/* 开关样式 */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+}
+
+/* 隐藏默认checkbox */
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* 开关滑块 */
+.switch .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: .4s;
+	border-radius: 24px;
+}
+
+.switch .slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	transition: .4s;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 开关打开状态 */
+.switch input:checked+.slider {
+	background-color: #36A12B;
+}
+
+.switch input:checked+.slider:before {
+	transform: translateX(26px);
+}
+
+/* 开关关闭时文本样式 */
+.setting-item:has(.switch input:not(:checked)) label:first-of-type {
+	text-decoration: line-through;
+	color: #6c757d;
+	opacity: 0.7;
+}
+
+/* 开关悬停效果 */
+.switch:hover .slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+	.setting-item {
+		padding: 12px;
+	}
+
+	.select-container {
+		gap: 6px;
+	}
+
+	.select-container button {
+		padding: 6px 12px;
+		font-size: 12px;
+	}
+
+	.slider-container {
+		gap: 8px;
+	}
+}
+
+/* 禁用状态样式 */
+.setting-item.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.setting-item.disabled label {
+	color: #6c757d;
+}
+
+#setting-close {
+	position: absolute;
+	left: 9px;
+	font-size: 1.4rem;
+	top: 5px;
+}
+
+.out {
+	animation: fadeOut 1.2s ease;
 }
