@@ -1,3 +1,5 @@
+
+
 /*=== 初始变量 ===*/
 
 // 获取主容器
@@ -7,17 +9,27 @@ const ele_content = document.getElementById("content");
 let lastRefreshTime = 0;
 
 // === 统一定义 options（修复作用域问题） ===
-let options = Object.assign({
+this.options = this.options || {
 	refreshTime: 3600000,
 	bgColor: "#f8f5ef",
 	textOnhoverColor: "#7b5e2a",
 	boxBorderColor: "#d5c8b6",
 	enableBgAnimation: true,
 	runBgAnimation: true,
-	ballColor: "#dda7896e"
-}, JSON.parse(localStorage.getItem("poetryWallPaperOption") || "{}"));
+	bgAnimationType: 0
+};
 
-updateSetting();
+this.animationType = ["Ball", "LightLine"];
+
+function livelyPropertyListener(key, value) {
+	if (!this.options) this.options = {};
+	if (!this.animationType) this.animationType = ["Ball", "LightLine"];
+	if (key === "refreshTime") {
+		options[key] = parseInt(value) || 3600000; // 默认1h
+	}
+	options[key] = value;
+	updateSetting();
+}
 
 /*=== 工具函数 ===*/
 function createEle(ele, id, cN) {
@@ -65,15 +77,22 @@ fetch('./chipai.json')
 
 function poetryType(title) {
 	if (chipaiData && title) {
-		if (chipaiData.some(c => title.startsWith(c))) return "词";
+		if (chipaiData.some(c => title.startsWith(c + "·") || title === c)) return "词";
 	}
 	return "诗";
+}
+
+function setPoetryType(type) {
+	ele_poetry.className = type === "词" ? "chii" : "shi";
+	document.querySelectorAll(".s").forEach(e => {
+		e.classList.toggle("chi", type === "词");
+	});
 }
 
 /*=== 刷新诗词函数 ===*/
 function setPoetry() {
 	jinrishici.load(r => {
-		if (r.data.origin.content > 10 || r.data.origin.content.join("").length > 200) {
+		if (r.data.origin.content.length > 10 || r.data.origin.content.join("").length > 200) {
 			setPoetry();
 			return;
 		}
@@ -91,10 +110,7 @@ function setPoetry() {
 		html += "</div>";
 
 		ele_poetry.innerHTML = html;
-		ele_poetry.className = type === "词" ? "chii" : "shi";
-		document.querySelectorAll(".s").forEach(e => {
-			e.classList.toggle("chi", type === "词");
-		});
+		setPoetryType(type)
 
 		// 设置点击复制事件
 		document.getElementById("title").onclick = () => {
@@ -120,7 +136,8 @@ function setPoetry() {
 
 		// ✅ 新的锁定逻辑
 		const symbol = document.getElementById("symbol");
-		symbol.onclick = () => {
+
+		function lockTime() {
 			const locked = document.getElementById("symbol").classList.toggle("locked");
 			if (locked) {
 				// 刚锁定：记录暂停时间
@@ -133,23 +150,35 @@ function setPoetry() {
 					lastPTime = 0;
 				}
 			}
-		};
+		}
+		symbol.onclick = lockTime;
+		lockTime() // 立即调用一次检测
+		lockTime() // 立即调用二次检测(把locked状态去掉)
 	});
 }
 
 // 刷新按钮
 let refreshButton = document.getElementById("refresh");
+let lastRefBtnTime = 0; // 上一次主动刷新时间
 refreshButton.onclick = () => {
+	if (Date.now() - lastRefBtnTime < 10000) return; // 禁止频繁刷新
 	setPoetry();
+	lastRefBtnTime = Date.now();
 	lastRefreshTime = Date.now();
 	refreshButton.classList.add("rotation");
 	setTimeout(() => refreshButton.classList.remove("rotation"), 900);
 };
 
+function updateSetting() {
+	let vars = document.documentElement.style;
+	vars.setProperty("--box-border-color", options.boxBorderColor);
+	vars.setProperty("--bg-color", options.bgColor);
+	vars.setProperty("--poety-onhover-color", options.textOnhoverColor);
+}
+
 /*=== 背景动画 ===*/
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-let balls = [];
 
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
@@ -157,6 +186,83 @@ function resizeCanvas() {
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
+
+function drawGradientRect(ctx, color1, color2, x, y, width, height) {
+	const gradient = ctx.createLinearGradient(x, y, x, y + height);
+	gradient.addColorStop(0, color1);
+	gradient.addColorStop(1, color2);
+	ctx.fillStyle = gradient;
+	ctx.fillRect(x, y, width, height);
+}
+
+/*=== 颜色相关函数 ===*/
+/**
+ * 生成随机高亮度色相，并返回其十六进制颜色及临近色
+ * @returns {{baseColor: string, adjacentColor: string}} 包含基础颜色和临近色的对象
+ */
+function randomColors() {
+	// 生成随机色相 (0-360度)
+	const randomHue = Math.floor(Math.random() * 361);
+	// 固定高饱和度和高亮度以确保颜色明亮
+	const saturation = 80; // 80% 饱和度
+	const lightness = 70; // 70% 亮度，大于0.7(70%)符合高亮度要求
+
+	// 生成基础颜色
+	const baseColor = hslToHex(randomHue, saturation, lightness);
+	// 在色相环上偏移30度生成临近色
+	const adjacentHue = (randomHue + 30) % 360;
+	const adjacentColor = hslToHex(adjacentHue, saturation, lightness);
+
+	return {
+		baseColor: baseColor,
+		adjacentColor: adjacentColor
+	};
+}
+
+/**
+ * 将HSL颜色值转换为十六进制格式
+ * @param {number} h - 色相 (0-360)
+ * @param {number} s - 饱和度 (0-100)
+ * @param {number} l - 亮度 (0-100)
+ * @returns {string} 十六进制颜色码
+ */
+function hslToHex(h, s, l) {
+	// 将饱和度s和亮度l从百分比转换为0-1的小数
+	s /= 100;
+	l /= 100;
+
+	const c = (1 - Math.abs(2 * l - 1)) * s;
+	const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+	const m = l - c / 2;
+
+	let r, g, b;
+
+	if (h >= 0 && h < 60) {
+		[r, g, b] = [c, x, 0];
+	} else if (h >= 60 && h < 120) {
+		[r, g, b] = [x, c, 0];
+	} else if (h >= 120 && h < 180) {
+		[r, g, b] = [0, c, x];
+	} else if (h >= 180 && h < 240) {
+		[r, g, b] = [0, x, c];
+	} else if (h >= 240 && h < 300) {
+		[r, g, b] = [x, 0, c];
+	} else {
+		[r, g, b] = [c, 0, x];
+	}
+
+	// 将RGB值转换为十六进制
+	const toHex = (color) => {
+		const hex = Math.round((color + m) * 255).toString(16);
+		return hex.length === 1 ? '0' + hex : hex;
+	};
+
+	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+
+/*=== 小球动画 ===*/
+let balls = [];
 
 function addBall(r, x, y) {
 	const vx = (Math.random() - 0.5) * 1.5;
@@ -175,7 +281,7 @@ function drawBall() {
 	balls.forEach(ball => {
 		ctx.beginPath();
 		ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
-		ctx.fillStyle = options.ballColor;
+		ctx.fillStyle = "#dda7896e";
 		ctx.fill();
 		ctx.closePath();
 	});
@@ -198,156 +304,58 @@ function updateBall() {
 	}
 }
 
-/*=== 更新设置样式 ===*/
-function updateSetting() {
-	let vars = document.documentElement.style;
-	vars.setProperty("--box-border-color", options.boxBorderColor);
-	vars.setProperty("--bg-color", options.bgColor);
-	vars.setProperty("--poety-onhover-color", options.textOnhoverColor);
-	localStorage.setItem("poetryWallPaperOption", JSON.stringify(options));
-}
+/*=== 光束动画 ===*/
+let lightLines = [];
 
-/*=== 恢复默认设置 ===*/
-function reSetting() {
-	options = {
-		refreshTime: 3600000,
-		bgColor: "#f8f5ef",
-		textOnhoverColor: "#7b5e2a",
-		boxBorderColor: "#d5c8b6",
-		enableBgAnimation: true,
-		runBgAnimation: true,
-		ballColor: "#dda7896e"
+function addLightLine() {
+	let {
+		baseColor,
+		adjacentColor
+	} = randomColors();
+	let headColor = baseColor + "DD";
+	let tailColor = adjacentColor + "00";
+	let length = canvas.height * 0.25;
+	let speed = 2.25;
+	let x = Math.random() * canvas.width;
+	let y = canvas.height + length;
+	let line = {
+		headColor,
+		tailColor,
+		length,
+		speed,
+		x,
+		y
 	};
-	updateSetting();
+	lightLines.push(line)
 }
 
-/*=== 设置界面 ===*/
-function createSetting(settings, opts) {
-	let container = createEle("div", "setting");
-	document.body.append(container);
-
-	settings.forEach((setting, i) => {
-		const itemEl = document.createElement('div');
-		itemEl.className = 'setting-item';
-		const label = document.createElement('label');
-		label.textContent = setting.label;
-		itemEl.appendChild(label);
-
-		let ctrl;
-		if (setting.type === 'input') {
-			ctrl = document.createElement('input');
-			ctrl.type = setting.inputType || 'text';
-			ctrl.value = opts[setting.key] ?? setting.placeholder ?? '';
-			ctrl.addEventListener('change', () => {
-				let v = ctrl.value;
-				if (setting.inputType === 'number') v = parseFloat(v);
-				opts[setting.key] = v;
-				updateSetting();
-			});
-		} else if (setting.type === 'switch') {
-			ctrl = document.createElement('label');
-			ctrl.className = 'switch';
-			const input = document.createElement('input');
-			input.type = 'checkbox';
-			input.checked = Boolean(opts[setting.key]);
-			const slider = document.createElement('span');
-			slider.className = 'slider';
-			ctrl.append(input, slider);
-			input.addEventListener('change', () => {
-				if (setting.key === "default") {
-					reSetting();
-					container.remove();
-					createSetting(settings, options);
-					return;
-				}
-				opts[setting.key] = input.checked;
-				updateSetting();
-			});
-		}
-
-		itemEl.appendChild(ctrl);
-		container.appendChild(itemEl);
-		if (i < settings.length - 1) container.appendChild(document.createElement("hr"));
+function drawLightLine() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	lightLines.forEach(l => {
+		drawGradientRect(ctx, l.headColor, l.tailColor, l.x, l.y, Math.max(8, canvas.width * 0.01), Math.max(400, l.length))
 	});
-
-	// 关闭按钮动画修复
-	let close = createEle("p", "setting-close");
-	close.innerHTML = "◀";
-	close.onclick = () => {
-		container.classList.add("out");
-		// setTimeout(() => {
-		container.remove();
-		document.getElementById("setting-icon").style.visibility = "visible";
-		// }, 300);
-	};
-	container.append(close);
 }
 
-/*=== 设置项 ===*/
-const settings = [{
-		type: 'input',
-		key: 'refreshTime',
-		label: '刷新间隔',
-		inputType: 'number',
-		placeholder: 3600000
-	},
-	{
-		type: 'input',
-		key: 'bgColor',
-		label: '背景色',
-		inputType: 'text',
-		placeholder: '#f7f3e9'
-	},
-	{
-		type: 'input',
-		key: 'boxBorderColor',
-		label: '盒边框色',
-		inputType: 'text',
-		placeholder: '#d5c8b6'
-	},
-	{
-		type: 'input',
-		key: 'textOnhoverColor',
-		label: '鼠标悬浮色',
-		inputType: 'text',
-		placeholder: '#7b5e2a'
-	},
-	{
-		type: 'switch',
-		key: 'enableBgAnimation',
-		label: '启用背景动画'
-	},
-	{
-		type: 'switch',
-		key: 'runBgAnimation',
-		label: '运行背景动画'
-	},
-	{
-		type: 'input',
-		key: 'ballColor',
-		label: '背景小球色',
-		inputType: 'text',
-		placeholder: '#dda7896e'
-	},
-	{
-		type: 'switch',
-		key: 'default',
-		label: '恢复默认设置'
+function updateLightLine() {
+	lightLines.forEach((l, i) => {
+		l.y -= l.speed;
+		if (l.y < -Math.max(400, l.length)) {
+			lightLines.splice(i, 1);
+		}
+	})
+	drawLightLine();
+	if (Math.random() < 0.012) {
+		addLightLine();
 	}
-];
-
-document.getElementById("setting-icon").onclick = () => {
-	createSetting(settings, options);
-	document.getElementById("setting-icon").style.visibility = "hidden";
-};
-
+}
 
 let lastPTime = 0; // 上一次暂停时间
 /*=== 动画主循环 ===*/
 function update() {
 	requestAnimationFrame(update);
-	if (options.enableBgAnimation && options.runBgAnimation) updateBall();
-	else if (options.enableBgAnimation && !options.runBgAnimation) drawBall();
+	//console.log(animationType[options.bgAnimationType])
+	if (options.enableBgAnimation && options.runBgAnimation) this[`update${animationType[options.bgAnimationType] || "Ball"}`]();
+	else if (options.enableBgAnimation && !options.runBgAnimation) this[`draw${animationType[options.bgAnimationType] || "Ball"}`]();
 	else if (!options.enableBgAnimation) ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	// ✅ 只有未锁定时才自动刷新
@@ -359,3 +367,4 @@ function update() {
 	}
 }
 update();
+livelyPropertyListener("bgAnimationType", 1)

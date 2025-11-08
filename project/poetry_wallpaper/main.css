@@ -4,10 +4,10 @@
 	--poety-onhover-color: #7b5e2a;
 }
 
-@font-face {
+/*@font-face {
 	font-family: "t";
 	src: url(./t.ttf) format("truetype")
-}
+}*/
 
 * {
 	margin: 0;
@@ -16,7 +16,7 @@
 }
 
 body {
-	font-family: "t", "Noto Serif SC", serif;
+	font-family: "Noto Serif SC", serif;
 	background: var(--bg-color);
 	/*background: var(--bg-color) url('https://www.transparenttextures.com/patterns/paper-fibers.png');*/
 	color: #2c2c2c;

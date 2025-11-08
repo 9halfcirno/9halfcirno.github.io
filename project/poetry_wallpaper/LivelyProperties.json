@@ -1,0 +1,41 @@
+{
+	"refreshTime": {
+		"text": "诗词刷新间隔(ms)",
+		"type": "textbox",
+		"value": "3600000"
+	},
+	"bgColor": {
+		"text": "背景颜色",
+		"type": "color",
+		"value": "#f8f5ef"
+	},
+	"textOnhoverColor": {
+		"text": "文本悬浮色",
+		"type": "color",
+		"value": "#7b5e2a"
+	},
+	"boxBorderColor": {
+		"text": "盒边框色",
+		"type": "color",
+		"value": "#d5c8b6"
+	},
+	"enableBgAnimation": {
+		"type": "checkbox",
+		"value": true,
+		"text": "渲染背景动画"
+	},
+	"runBgAnimation": {
+		"type": "checkbox",
+		"value": true,
+		"text": "运行背景动画"
+	},
+	"bgAnimationType": {
+		"type": "dropdown",
+		"value": 1,
+		"text": "动画",
+		"items": [
+			"Ball",
+			"LightLine"
+		]
+	}
+}
