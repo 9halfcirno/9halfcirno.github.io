@@ -4,11 +4,6 @@
 	--poety-onhover-color: #7b5e2a;
 }
 
-/*@font-face {
-	font-family: "t";
-	src: url(./t.ttf) format("truetype")
-}*/
-
 * {
 	margin: 0;
 	padding: 0;
@@ -18,7 +13,6 @@
 body {
 	font-family: "Noto Serif SC", serif;
 	background: var(--bg-color);
-	/*background: var(--bg-color) url('https://www.transparenttextures.com/patterns/paper-fibers.png');*/
 	color: #2c2c2c;
 	height: 100vh;
 	display: flex;
@@ -33,15 +27,11 @@ canvas {
 }
 
 #tip-box {
-	top: 0;
 	position: fixed;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	color: #7F7F7F;
-}
-
-.tip {
-
 }
 
 /* ========== 诗歌卡片 ========== */
@@ -49,7 +39,7 @@ canvas {
 	background: rgba(255, 255, 255, 0.5);
 	border: 1px solid var(--box-border-color);
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-	padding: 1.5rem 1.5rem;
+	padding: 1.5rem;
 	border-radius: 12px;
 	text-align: center;
 	max-width: 70%;
@@ -60,9 +50,8 @@ canvas {
 }
 
 .locked {
-	outline: 2px solid #CE7A1C;
+	outline: 3px solid #CE7A1C;
 }
-
 .locked:after {
 	content: "L";
 	position: absolute;
@@ -70,7 +59,7 @@ canvas {
 	font-size: 1rem;
 }
 
-/* 顶部小印章装饰 */
+/* 顶部印章 */
 #symbol {
 	position: absolute;
 	top: -14px;
@@ -83,20 +72,10 @@ canvas {
 	transform: rotate(-8deg);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
+.sy-shi { background: #c0392b; color: #fff; }
+.sy-chi { background: #C0A82B; color: #fff; }
 
-.sy-shi {
-	background: #c0392b;
-	color: #fff;
-}
-
-.sy-chi {
-	background: #C0A82B;
-	color: #fff;
-}
-
-.fadeInTrigger {
-	animation: fadeIn 1.2s ease;
-}
+.fadeInTrigger { animation: fadeIn 1.2s ease; }
 
 /* ========== 内容样式 ========== */
 #title {
@@ -107,15 +86,12 @@ canvas {
 	text-align: center;
 }
 
-#dynasty,
-#author {
+#dynasty, #author {
 	font-size: 2rem;
 	color: #666;
 }
 
-#content {
-	margin-top: 0.4rem;
-}
+#content { margin-top: 0.4rem; }
 
 .s {
 	font-size: 2.35rem;
@@ -123,80 +99,26 @@ canvas {
 	line-height: 1.5;
 	transition: color 0.3s ease;
 }
+.s:hover { color: var(--poety-onhover-color); }
 
-.s:hover {
-	color: var(--poety-onhover-color);
-}
+.chi { text-align: left; }
+.chi:before { content: "　　"; }
 
-.chi {
-	text-align: left;
-}
-
-.chi:before {
-	content: "　　";
-}
-
-/* ========== 动画效果 ========== */
+/* ========== 动画 ========== */
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(15px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	from { opacity: 0; transform: translateY(15px); }
+	to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeOut {
-	from {
-		opacity: 1;
-		transform: translateY(0px);
-	}
-
-	to {
-		opacity: 0;
-		transform: translateY(15px);
-	}
+	from { opacity: 1; transform: translateY(0); }
+	to { opacity: 0; transform: translateY(15px); }
 }
-
 @keyframes spin {
-	from {
-		transform: rotate(0deg);
-		/* 起始角度 */
-	}
-
-	to {
-		transform: rotate(360deg);
-		/* 结束角度 */
-	}
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
 }
 
-/* 响应式优化 */
-@media (max-width: 500px) {
-	#poetry {
-		padding: 0.8rem 1rem;
-	}
-
-	#title {
-		font-size: 1.6rem;
-	}
-
-	#dynasty,
-	#author {
-		font-size: 0.8rem;
-		color: #666;
-	}
-
-	.s {
-		font-size: 1.4rem;
-	}
-
-	#symbol {
-		font-size: 1rem;
-	}
-}
-
+/* ========== 按钮与图标 ========== */
 #refresh {
 	position: fixed;
 	right: 0;
@@ -206,45 +128,41 @@ canvas {
 	font-weight: bold;
 	color: rgba(0, 0, 0, 0.5);
 }
+.rotation { animation: spin 0.9s ease; }
 
-.rotation {
-	animation: spin 0.9s ease;
-}
-
-#setting-icon {
+#good-icon {
 	position: fixed;
 	left: 0;
 	top: 0;
 	font-family: serif;
-	font-size: 3.6rem;
+	font-size: 1.5rem;
 	font-weight: bold;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(0, 0, 0, 0.2);
 }
 
-#setting {
-	display: flex;
+/* ========== 设置面板 ========== */
+#setting, #good-thing {
 	position: fixed;
+	display: flex;
 	flex-direction: column;
 	background: rgba(255, 255, 255, 0.5);
-	backdrop-filter: blur(5px);
 	border: 1px solid var(--box-border-color);
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-	padding: 1rem 1.5rem;
 	border-radius: 12px;
-	max-width: 90%;
-	max-height: 80%;
-	animation: fadeIn 0.6s ease;
+	padding: 1.5rem;
+	backdrop-filter: blur(5px);
+	animation: fadeIn 1.2s ease;
+}
+#setting {
 	top: 1rem;
 	left: 15px;
+	max-width: 90%;
+	max-height: 80%;
 	overflow-y: scroll;
-	
 }
-
-
 .setting-item {
 	padding: 12px;
 }
-
 .setting-item label {
 	display: block;
 	margin-bottom: 6px;
@@ -252,8 +170,6 @@ canvas {
 	color: #333;
 	font-size: 1rem;
 }
-
-/* 输入框样式 */
 .setting-item input[type="text"],
 .setting-item input[type="number"] {
 	width: 100%;
@@ -261,105 +177,62 @@ canvas {
 	border: 2px solid var(--box-border-color);
 	border-radius: 6px;
 	font-size: 14px;
-	transition: all 0.2s ease;
-	background-color: white;
+	transition: 0.2s;
+	background: #fff;
 	box-sizing: border-box;
 }
-
-.setting-item input[type="text"]:focus,
-.setting-item input[type="number"]:focus {
+.setting-item input:focus {
 	outline: none;
 	border-color: #007bff;
 	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
-
-.setting-item input[type="text"]::placeholder {
+.setting-item input::placeholder {
 	color: #6c757d;
 	opacity: 0.7;
 }
 
-/* 选择项样式 */
+/* 选择项 */
 .select-container {
 	display: flex;
 	gap: 8px;
 	flex-wrap: wrap;
 }
-
 .select-container button {
 	padding: 8px 16px;
 	border: none;
 	border-radius: 20px;
-	background-color: #e9ecef;
+	background: #e9ecef;
 	color: #495057;
 	font-size: 13px;
 	font-weight: 500;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: 0.2s;
 }
-
 .select-container button:hover {
-	background-color: #dee2e6;
+	background: #dee2e6;
 	transform: translateY(-1px);
 }
-
 .select-container button.active {
-	background-color: #007bff;
+	background: #007bff;
 	color: white;
 	box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
 }
 
-/* 滑条容器 */
+/* 滑条 */
 .slider-container {
 	display: flex;
 	align-items: center;
 	gap: 12px;
 }
-
-/* 自定义滑条样式 */
 .slider-container input[type="range"] {
 	flex: 1;
-	-webkit-appearance: none;
 	appearance: none;
 	height: 6px;
 	background: #e1e5e9;
 	border-radius: 10px;
 	outline: none;
 }
-
-/* 滑条轨道 - Webkit浏览器 */
-.slider-container input[type="range"]::-webkit-slider-track {
-	height: 6px;
-	background: #e1e5e9;
-	border-radius: 10px;
-	border: none;
-}
-
-.slider-container input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	width: 18px;
-	height: 18px;
-	background: #007bff;
-	border-radius: 50%;
-	cursor: pointer;
-	border: 2px solid white;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	transition: all 0.2s ease;
-}
-
-.slider-container input[type="range"]::-webkit-slider-thumb:hover {
-	transform: scale(1.1);
-	background: #0056b3;
-}
-
-/* 滑条轨道 - Firefox */
-.slider-container input[type="range"]::-moz-range-track {
-	height: 6px;
-	background: #e1e5e9;
-	border-radius: 10px;
-	border: none;
-}
-
+.slider-container input[type="range"]::-webkit-slider-thumb,
 .slider-container input[type="range"]::-moz-range-thumb {
 	width: 18px;
 	height: 18px;
@@ -368,15 +241,13 @@ canvas {
 	cursor: pointer;
 	border: 2px solid white;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	transition: all 0.2s ease;
+	transition: 0.2s;
 }
-
+.slider-container input[type="range"]::-webkit-slider-thumb:hover,
 .slider-container input[type="range"]::-moz-range-thumb:hover {
 	transform: scale(1.1);
 	background: #0056b3;
 }
-
-/* 滑条值显示 */
 .slider-container span {
 	min-width: 30px;
 	text-align: center;
@@ -385,105 +256,97 @@ canvas {
 	font-size: 14px;
 }
 
-/* 开关样式 */
+/* 开关 */
 .switch {
 	position: relative;
 	display: inline-block;
 	width: 50px;
 	height: 24px;
 }
-
-/* 隐藏默认checkbox */
 .switch input {
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
-
-/* 开关滑块 */
-.switch .slider {
+.slider {
 	position: absolute;
 	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #ccc;
+	inset: 0;
+	background: #ccc;
 	transition: .4s;
 	border-radius: 24px;
 }
-
-.switch .slider:before {
-	position: absolute;
+.slider:before {
 	content: "";
+	position: absolute;
 	height: 18px;
 	width: 18px;
 	left: 3px;
 	bottom: 3px;
-	background-color: white;
-	transition: .4s;
+	background: #fff;
 	border-radius: 50%;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	transition: .4s;
 }
+.switch input:checked + .slider { background: #36A12B; }
+.switch input:checked + .slider:before { transform: translateX(26px); }
 
-/* 开关打开状态 */
-.switch input:checked+.slider {
-	background-color: #36A12B;
-}
-
-.switch input:checked+.slider:before {
-	transform: translateX(26px);
-}
-
-/* 开关关闭时文本样式 */
 .setting-item:has(.switch input:not(:checked)) label:first-of-type {
 	text-decoration: line-through;
 	color: #6c757d;
 	opacity: 0.7;
 }
+.switch:hover .slider { box-shadow: 0 0 1px #2196F3; }
 
-/* 开关悬停效果 */
-.switch:hover .slider {
-	box-shadow: 0 0 1px #2196F3;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-	.setting-item {
-		padding: 12px;
-	}
-
-	.select-container {
-		gap: 6px;
-	}
-
-	.select-container button {
-		padding: 6px 12px;
-		font-size: 12px;
-	}
-
-	.slider-container {
-		gap: 8px;
-	}
-}
-
-/* 禁用状态样式 */
 .setting-item.disabled {
 	opacity: 0.6;
 	pointer-events: none;
 }
-
-.setting-item.disabled label {
-	color: #6c757d;
-}
+.setting-item.disabled label { color: #6c757d; }
 
 #setting-close {
 	position: absolute;
 	left: 9px;
-	font-size: 1.4rem;
 	top: 5px;
+	font-size: 1.4rem;
 }
 
-.out {
-	animation: fadeOut 1.2s ease;
+.out { animation: fadeOut 1.2s ease; }
+.okkk { animation: spin 1.2s ease infinite; }
+
+/* ========== 图片展示 ========== */
+#good-thing {
+	text-align: center;
+	width: 75%;
+	height: 75%;
+	overflow-y: scroll;
+	top: 2.5vh;
+}
+#good-img {
+	max-width: 100%;
+	max-height: 90%;
+	object-fit: contain;
+	border-radius: 12px;
+	border: 1px solid var(--box-border-color);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.img-loading { max-height: 75%; transition: 0.3s; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 500px) {
+	#poetry { padding: 0.8rem 1rem; }
+	#title { font-size: 1.6rem; }
+	#dynasty, #author { font-size: 0.8rem; }
+	.s { font-size: 1.4rem; }
+	#symbol { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+	.setting-item { padding: 12px; }
+	.select-container { gap: 6px; }
+	.select-container button {
+		padding: 6px 12px;
+		font-size: 12px;
+	}
+	.slider-container { gap: 8px; }
 }

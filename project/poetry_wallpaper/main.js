@@ -1,5 +1,3 @@
-
-
 /*=== 初始变量 ===*/
 
 // 获取主容器
@@ -191,8 +189,16 @@ function drawGradientRect(ctx, color1, color2, x, y, width, height) {
 	const gradient = ctx.createLinearGradient(x, y, x, y + height);
 	gradient.addColorStop(0, color1);
 	gradient.addColorStop(1, color2);
+
+	ctx.save();
+	ctx.shadowColor = color1; // 发光颜色（可以用 headColor）
+	ctx.shadowBlur = width * 2.5; // 模糊强度，可调整
+	ctx.shadowOffsetX = 0;
+	ctx.shadowOffsetY = 0;
+
 	ctx.fillStyle = gradient;
 	ctx.fillRect(x, y, width, height);
+	ctx.restore();
 }
 
 /*=== 颜色相关函数 ===*/
@@ -210,7 +216,7 @@ function randomColors() {
 	// 生成基础颜色
 	const baseColor = hslToHex(randomHue, saturation, lightness);
 	// 在色相环上偏移30度生成临近色
-	const adjacentHue = (randomHue + 30) % 360;
+	const adjacentHue = (randomHue + 20 + Math.random() * 20) % 360;
 	const adjacentColor = hslToHex(adjacentHue, saturation, lightness);
 
 	return {
@@ -314,9 +320,29 @@ function addLightLine() {
 	} = randomColors();
 	let headColor = baseColor + "DD";
 	let tailColor = adjacentColor + "00";
-	let length = canvas.height * 0.25;
+	let length = Math.max(400, canvas.height * 0.36);
 	let speed = 2.25;
-	let x = Math.random() * canvas.width;
+	let x = 0;
+	let whileTimes = 0;
+	do {
+		x = Math.random() * canvas.width;
+		whileTimes++;
+	} while (isC(x) && whileTimes < 20);
+
+	function isC(x) {
+		const lineWidth = Math.max(5, canvas.width * 0.006);
+
+		for (let i = 0; i < lightLines.length; i++) {
+			const l = lightLines[i];
+			const lx1 = l.x;
+			const lx2 = l.x + lineWidth;
+			const x1 = x;
+			const x2 = x + lineWidth;
+			const margin = 10;
+			if (!(x2 + margin < lx1 || x1 - margin > lx2)) return true;
+		}
+		return false; // 无重叠
+	}
 	let y = canvas.height + length;
 	let line = {
 		headColor,
@@ -330,16 +356,18 @@ function addLightLine() {
 }
 
 function drawLightLine() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	//ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#E5E5E5";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	lightLines.forEach(l => {
-		drawGradientRect(ctx, l.headColor, l.tailColor, l.x, l.y, Math.max(8, canvas.width * 0.01), Math.max(400, l.length))
+		drawGradientRect(ctx, l.headColor, l.tailColor, l.x, l.y, Math.max(5, canvas.width * 0.006), l.length)
 	});
 }
 
 function updateLightLine() {
 	lightLines.forEach((l, i) => {
 		l.y -= l.speed;
-		if (l.y < -Math.max(400, l.length)) {
+		if (l.y < -l.length) {
 			lightLines.splice(i, 1);
 		}
 	})
@@ -365,6 +393,90 @@ function update() {
 			lastRefreshTime = Date.now();
 		}
 	}
+
+	if (Date.now() - lastClickGoodTime > 1000) {
+		if (goodLevel < goodStr.length + 5) {
+			goodLevel++;
+			lastClickGoodTime += 125;
+		}
+	};
+	if (goodLevel === 1) {
+		good_icon.className = "okkk";
+		good_box.style.visibility = "visible";
+	} else {
+		good_icon.className = "";
+		good_box.style.visibility = "hidden";
+	}
+	good_icon.innerHTML = goodStr[Math.max(0, goodStr.length - goodLevel)];
 }
+
+/*=== 私货部分😋 ===*/
+let good_icon = document.getElementById("good-icon")
+//let goodStr = "①۞";
+let goodStr = "⑨⑧⑦⑥⑤④③②①۞";
+let goodLevel = 15;
+let lastClickGoodTime = 0;
+good_icon.onclick = () => {
+	lastClickGoodTime = Date.now();
+	if (goodLevel > 1) goodLevel--;
+	if (good_icon.className === "okkk")
+		lastClickGoodTime = Date.now() - 1000;
+	else
+	if (goodLevel === 1) {
+		lastClickGoodTime = Infinity;
+		//loadGoodImg(); // 加载图片
+	}
+}
+
+let good_box = document.getElementById("good-thing");
+good_box.style.visibility = "hidden";
+let disableTag = ["水着", "欧派", "内裤", "胖次", "r18", "R18", "乳头", "巨乳"]
+
+function loadGoodImg() {
+	fetch("https://image.anosu.top/pixiv/json?r18=0&size=regular")
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data[0].tags.some(t => {
+				return disableTag.includes(t);
+				})) loadGoodImg() // 有屏蔽tag则重载
+			//let r = JSON.parse(data);
+			document.getElementById("good-img").src = data[0].url;
+			document.getElementById("good-img").dataset.pid = data[0].pid;
+			//document.getElementById("good-img-pid").innerHTML = data[0].pid;
+		})
+}
+
+document.getElementById("good-img").onclick = () => {
+	function convertImageUrl(originalUrl) {
+		return originalUrl
+		/*return originalUrl
+			// 将路径中的_master改为_original
+			.replace(/img-master/, 'img-original')
+			// 移除文件名中的_master[数字]部分
+			.replace(/(_p\d+)_master\d+(\..+)$/, '$1$2');*/
+	}
+	let url = document.getElementById("good-img").src;
+	navigator.clipboard.writeText(convertImageUrl(url)).then(() => {
+		console.log("复制链接成功");
+		tip("复制成功")
+	}, () => {
+		console.log("复制链接失败");
+		tip("复制失败")
+	});
+}
+
+document.getElementById("good-img-re").onclick = () => {
+	loadGoodImg();
+	document.getElementById("good-img").className = "img-loading";
+	document.getElementById("good-img-re").setAttribute("disabled", true);
+};
+document.getElementById("good-img").onerror = loadGoodImg;
+document.getElementById("good-img").onload = () => {
+	document.getElementById("good-img").className = "";
+	document.getElementById("good-img-pid").innerHTML = document.getElementById("good-img").dataset.pid;
+	document.getElementById("good-img-re").removeAttribute("disabled");
+};
+
 update();
 livelyPropertyListener("bgAnimationType", 1)
