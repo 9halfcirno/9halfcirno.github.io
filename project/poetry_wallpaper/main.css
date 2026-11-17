@@ -28,7 +28,7 @@ canvas {
 }
 
 #remove-warnning {
-	position: fixed;
+	position: absolute;
 	top: 2px;
 	display: flex;
 	flex-direction: column;
