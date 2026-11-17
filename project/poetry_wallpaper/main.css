@@ -16,6 +16,7 @@ body {
 	color: #2c2c2c;
 	height: 100vh;
 	display: flex;
+	flex-dir
 	align-items: center;
 	justify-content: center;
 	padding: 2rem;
@@ -24,6 +25,14 @@ body {
 
 canvas {
 	position: fixed;
+}
+
+#remove-warnning {
+	position: fixed;
+	top: 2px;
+	display: flex;
+	flex-direction: column;
+	color: #7F7F7F;
 }
 
 #tip-box {
